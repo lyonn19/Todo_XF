@@ -19,6 +19,14 @@ namespace com.company.todo.Views
             BindingContext = ViewModelLocator.Instance.Resolve<TasksViewModel>();
         }
 
+
+        protected override void OnAppearing()
+        {
+            ViewModelLocator.Instance.Resolve<TasksViewModel>().TodoTaskCommand.Execute(null);
+            base.OnAppearing();
+
+        }
+
         private void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
         {
 

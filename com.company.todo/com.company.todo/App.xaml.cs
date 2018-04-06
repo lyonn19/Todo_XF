@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
+using com.company.todo.Services.Navigation;
+using com.company.todo.ViewModels.Base;
 using com.company.todo.Views;
 using Xamarin.Forms;
 
@@ -13,7 +16,15 @@ namespace com.company.todo
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new TodoTasksPage()); 
+            MainPage = new NavigationPage(new TodoTasksPage());
+            //NavigationInit();
+            //MainPage = new MainPage();
+        }
+
+        private Task NavigationInit()
+        {
+            var navigationService = ViewModelLocator.Instance.Resolve<INavigationService>();
+            return navigationService.InitializeAsync();
         }
 
         protected override void OnStart()

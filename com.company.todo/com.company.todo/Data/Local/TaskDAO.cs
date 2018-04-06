@@ -16,7 +16,7 @@ namespace com.company.todo.Data.Local
 
         public TaskDao()
         {
-            _dbConn.CreateTableAsync<TaskDao>().Wait();
+            _dbConn.CreateTableAsync<Models.Task>().Wait();
         }
 
         public async Task<IEnumerable<Models.Task>> GetTasksAsync()

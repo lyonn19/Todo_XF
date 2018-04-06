@@ -23,14 +23,10 @@ namespace com.company.todo.Services.Navigation
 
         public Task InitializeAsync()
         {
-            return InitNavigateToAsync<AddTasksViewModel>();
+            return NavigateToAsync<TasksViewModel>();
         }
 
-        public Task InitNavigateToAsync<TViewModel>() where TViewModel : ViewModelBase
-        {
-            return FirstNavigateToAsync(typeof(TViewModel), null);
-        }
-
+        
         public Task NavigateToAsync<TViewModel>() where TViewModel : ViewModelBase
         {
             return InternalNavigateToAsync(typeof(TViewModel), null);
@@ -70,13 +66,6 @@ namespace com.company.todo.Services.Navigation
             await CurrentApplication.MainPage.Navigation.PushAsync(page);
         }
 
-
-
-        protected virtual async Task FirstNavigateToAsync(Type viewModelType, object parameter)
-        {
-            
-        }
-
         protected Type GetPageTypeForViewModel(Type viewModelType)
         {
             if (!Mappings.ContainsKey(viewModelType))
@@ -107,7 +96,6 @@ namespace com.company.todo.Services.Navigation
         {
             Mappings.Add(typeof(AddTasksViewModel), typeof(AddTasksPage));
             Mappings.Add(typeof(TasksViewModel), typeof(TodoTasksPage));
-            //Mappings.Add(typeof(BillViewModel), typeof(BillsView));
         }
     }
 }

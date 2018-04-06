@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="com.company.todo.Templates.TasksTemplate">
+  <ContentView.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Image Grid.Row="0" 
+                Grid.Column="0" 
+                Grid.ColumnSpan="2"
+                Source="{Binding Image}"/>
+
+            <Label Grid.Row="0" 
+                Grid.Column="1"
+                Text="{Binding Content}"/>
+
+            <!--<Label Grid.Row="1" 
+                Grid.Column="1"
+                Text="{Binding UpdateAt}"/>
+
+            <Switch 
+                Grid.Row="0" 
+                Grid.Column="2"
+                Grid.RowSpan="S2"
+                Toggled="{Binding Status}"/>-->
+
+        </Grid>
+
+    </ContentView.Content>
+</ContentView>

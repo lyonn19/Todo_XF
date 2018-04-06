@@ -71,6 +71,17 @@ namespace com.company.todo.ViewModels
             }
         }
 
+        private byte[] _pImage;
+        public byte[] PImage
+        {
+            get { return _pImage; }
+            set
+            {
+                _pImage = value;
+                OnPropertyChanged();
+            }
+        }
+
         public ICommand CameraCommand
         {
             get { return _cameraCommand ?? new Command(async () => await ExecuteCameraCommand(), () => CanExecuteCameraCommand()); }
@@ -112,21 +123,21 @@ namespace com.company.todo.ViewModels
             if (file == null)
                 return;
 
-            byte[] imageAsBytes = null;
+            //byte[] imageAsBytes = null;
             using (var memoryStream = new MemoryStream())
             {
                 file.GetStream().CopyTo(memoryStream);
                 file.Dispose();
-                imageAsBytes = memoryStream.ToArray();
+                PImage = memoryStream.ToArray();
             }
 
             var resizer = Xamarin.Forms.DependencyService.Get<IImageResize>();
 
-            imageAsBytes = resizer.ResizeImage(imageAsBytes, 1080, 1080);
+            PImage = resizer.ResizeImage(PImage, 1080, 1080);
             
             if (Images.Count == 0)
             {
-                PreviewImage = ImageSource.FromStream(() => new MemoryStream(imageAsBytes));
+                PreviewImage = ImageSource.FromStream(() => new MemoryStream(PImage));
             }
         }
 

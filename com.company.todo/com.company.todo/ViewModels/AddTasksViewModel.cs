@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -16,14 +17,12 @@ namespace com.company.todo.ViewModels
     public class AddTasksViewModel : ViewModelBase
     {
         #region Fields
-        public ObservableCollection<Models.Task> Tasks;
 
         #endregion
 
         #region Builder
         public AddTasksViewModel()
         {
-            Tasks = new ObservableCollection<Models.Task>();
         }
         #endregion
 
@@ -103,14 +102,22 @@ namespace com.company.todo.ViewModels
         /// <returns></returns>
         private async Task AddTask()
         {
-            await TaskDao.Instance.AddTaskAsync(new Models.Task()
+            try
             {
-                Content = Content,
-                CreatedAt = DateTime.Now,
-                //Imagen = Imagen,
-                Status = false,
-                UpdateAt = DateTime.Now,
-            });
+                await TaskDao.Instance.AddTaskAsync(new Models.Task()
+                {
+                    Content = Content,
+                    CreatedAt = DateTime.Now,
+                    Imagen = ViewModelLocator.Instance.Resolve<GalleryViewModel>().PImage,
+                    Status = false,
+                    UpdateAt = DateTime.Now,
+                });
+            }
+            catch (Exception)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", "Error saving task, try again", "OK");
+            }
+            
         }
         
         #endregion
