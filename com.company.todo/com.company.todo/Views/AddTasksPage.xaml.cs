@@ -18,5 +18,20 @@ namespace com.company.todo.Views
             InitializeComponent();
             BindingContext = ViewModelLocator.Instance.Resolve<AddTasksViewModel>();
         }
+
+        private async void Button_OnClicked(object sender, EventArgs e)
+        {
+            var response = await DisplayActionSheet("Image From", "Cancel", "Delete", "Camera", "Gallery");
+
+            switch (response)
+            {
+                case "Camera":
+                    ViewModelLocator.Instance.Resolve<GalleryViewModel>().CameraCommand.Execute(null);
+                    break;
+                case "Gallery":
+                    ViewModelLocator.Instance.Resolve<GalleryViewModel>().GalleryCommand.Execute(null);
+                    break;
+            }
+        }
     }
 }

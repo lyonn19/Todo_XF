@@ -6,9 +6,26 @@
         <ToolbarItem x:Name="Save" Text="Add" Command="{Binding AddTaskCommand}"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Content"/>
-            <Entry Placeholder="Task Name" Text="{Binding Content}"/>
-        </StackLayout>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0"
+                Text="Content"  />
+            <Entry Grid.Row="1"
+                Placeholder="Task Name" 
+                Text="{Binding Content}"/>
+            <Image
+			    Grid.Row="2"
+                Margin="30"
+			    Source="{Binding Imagen}">
+            </Image>
+            <Button Text="Attach Picture" 
+                Clicked="Button_OnClicked"
+                Grid.Row="3"/>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

@@ -73,8 +73,8 @@ namespace com.company.todo.ViewModels
             }
         }
 
-        private byte[] _imagen;
-        public byte[] Imagen
+        private ImageSource _imagen;
+        public ImageSource Imagen
         {
             get { return _imagen; }
             set
@@ -107,8 +107,8 @@ namespace com.company.todo.ViewModels
             {
                 Content = Content,
                 CreatedAt = DateTime.Now,
-                Imagen = Imagen,
-                Status = true,
+                //Imagen = Imagen,
+                Status = false,
                 UpdateAt = DateTime.Now,
             });
         }

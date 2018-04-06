@@ -32,6 +32,8 @@ namespace com.company.todo.ViewModels.Base
             // viewmodels
             _container.RegisterType<AddTasksViewModel>(new ContainerControlledLifetimeManager());
             _container.RegisterType<TasksViewModel>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<GalleryViewModel>(new ContainerControlledLifetimeManager());
+
             var unityServiceLocator = new UnityServiceLocator(_container);
             ServiceLocator.SetLocatorProvider(() => unityServiceLocator);
         }
