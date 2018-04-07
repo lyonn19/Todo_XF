@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Windows.Input;
+using com.company.todo.Control;
 using com.company.todo.Data.Local;
 using com.company.todo.Models;
 using com.company.todo.ViewModels.Base;
@@ -15,26 +18,15 @@ namespace com.company.todo.ViewModels
 {
     public class TasksViewModel : ViewModelBase
     {
+
         public ObservableCollection<ViewTask> PendingTasks { get; set; }
         
-        public ViewTask ViewTask { get; set; }
-
         public TasksViewModel()
         {
             PendingTasks = new ObservableCollection<ViewTask>();
-            
         }
 
-        private int _countTask;
-        public int CountTask {
-            get { return _countTask; }
-            set
-            {
-                _countTask = value;
-                OnPropertyChanged();
-            }
-        }
-
+        
         /// <summary>
         /// Init ViewModel
         /// </summary>
@@ -54,7 +46,7 @@ namespace com.company.todo.ViewModels
                 var result = await TaskDao.Instance.GetTasksAsync();
                 foreach (var item in result)
                 {
-                    PendingTasks.Add(new ViewTask()
+                    PendingTasks.Add(new ViewTask
                     {
                         Imagen = ImageSource.FromStream(() => new MemoryStream(item.Imagen)),
                         Content = item.Content,
@@ -64,7 +56,6 @@ namespace com.company.todo.ViewModels
                     });
                 }
 
-                CountTask = PendingTasks.Count;
             }
             catch (Exception)
             {
@@ -72,6 +63,11 @@ namespace com.company.todo.ViewModels
             }
         }
 
+        public ICommand FlipCommand => new Command(Flip);
+        private void Flip()
+        {
+            MessagingCenter.Send(this, AppSettings.TransitionMessage, TransitionType.Flip);
+        }
 
         public ICommand NavigateToAddTask
         {
@@ -108,7 +104,7 @@ namespace com.company.todo.ViewModels
             }
         }
 
-
+        
     }
     
     public class ViewTask

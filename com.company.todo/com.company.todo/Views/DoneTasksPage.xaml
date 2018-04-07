@@ -6,8 +6,10 @@
              Title="My completed TODOs">
         <ContentPage.Content>
             <StackLayout>
-                <SearchBar Text="Search" SearchCommand=""/>
-                <Label Text="{Binding CountTask}"></Label>
+            <SearchBar x:Name="SeachBarDoneTasks" 
+                       SearchButtonPressed="SearchBar_OnSearchButtonPressed"
+                       TextChanged="SearchBar_OnTextChanged"/>
+            <Label Text="{Binding CountTask}"/>
                 <ListView x:Name="ListViewTasks" ItemsSource="{Binding PendingTasks}" 
                       ItemTapped="Handle_ItemTapped" 
                       BackgroundColor="Transparent"

@@ -6,10 +6,14 @@
              Title="My pending TODOs">
     <ContentPage.ToolbarItems>
         <ToolbarItem x:Name="Save" Text="Add" Command="{Binding NavigateToAddTask}"/>
+        <ToolbarItem Name="Flip" Order="Primary" Icon="icon.png" Text="Item 2" Priority="1" Clicked="MenuItem_OnClicked"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="{Binding CountTask}"></Label>
+        <StackLayout Padding="20">
+            <SearchBar x:Name="SeachBarTodoTasks" 
+                       SearchButtonPressed="SearchBar_OnSearchButtonPressed"
+                       TextChanged="SearchBar_OnTextChanged"/>
+            
             <ListView x:Name="ListViewTasks" ItemsSource="{Binding PendingTasks}" 
                       ItemTapped="Handle_ItemTapped" 
                       BackgroundColor="Transparent"

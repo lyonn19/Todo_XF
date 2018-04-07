@@ -38,6 +38,8 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AppSettings.cs" />
+    <Compile Include="Control\TransitionNavigationPage.cs" />
     <Compile Include="Data\Base\BaseDatabase.cs" />
     <Compile Include="Data\Local\TaskDAO.cs" />
     <Compile Include="DependencyService\IImageResize.cs" />

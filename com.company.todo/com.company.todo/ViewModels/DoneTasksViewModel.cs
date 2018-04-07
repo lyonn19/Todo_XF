@@ -21,6 +21,17 @@ namespace com.company.todo.ViewModels
             DoneTasks = new ObservableCollection<ViewTask>();
         }
 
+        private string _searchText;
+        public string SearchText
+        {
+            get { return _searchText; }
+            set
+            {
+                _searchText = value;
+                OnPropertyChanged();
+            }
+        }
+
         public override Task InitializeAsync(object navigationData)
         {
             DoneTaskCommand.Execute(null);
@@ -73,6 +84,46 @@ namespace com.company.todo.ViewModels
             finally
             {
                 IsBusy = false;
+            }
+        }
+
+        Command _searchDoneTasksCommand;
+        public Command SearchDoneTasksCommand
+        {
+            get
+            {
+                return _searchDoneTasksCommand ?? (_searchDoneTasksCommand = new Command(async () => await SeachDoneTasksAsync(), () => !IsBusy));
+            }
+        }
+        public async Task SeachDoneTasksAsync()
+        {
+            if (IsBusy)
+                return;
+            try
+            {
+                //PendingTasks.Clear();
+                IsBusy = true;
+                SearchTodoTask();
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+        }
+
+        private void SearchTodoTask()
+        {
+            try
+            {
+                DoneTasks.Where(x => x.Content.ToLower().Contains(SearchText.ToLower()));
+                //var enumerable = result as ViewTask[] ?? result.ToArray();
+                //var any = enumerable.Any();
+                //ListViewTasks.ItemsSource = any ? (IEnumerable)enumerable : new List<string>() { "Task Not found" };
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
         }
 
