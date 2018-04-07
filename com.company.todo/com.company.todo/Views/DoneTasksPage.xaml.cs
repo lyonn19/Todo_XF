@@ -16,7 +16,7 @@ namespace com.company.todo.Views
         public DoneTasksPage()
         {
             InitializeComponent();
-            BindingContext = ViewModelLocator.TasksViewModel;
+            BindingContext = ViewModelLocator.Instance.Resolve<DoneTasksViewModel>();
         }
 
         private void Handle_ItemTapped(object sender, ItemTappedEventArgs e)

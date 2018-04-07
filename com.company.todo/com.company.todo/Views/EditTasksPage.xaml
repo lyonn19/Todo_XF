@@ -4,9 +4,14 @@
              x:Class="com.company.todo.Views.EditTasksPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <StackLayout>
+                <Image Source="{Binding SelectedTask.Imagen}"/>
+                <Entry Text="{Binding SelectedTask.Content}"/>
+                <Label Text="{Binding SelectedTask.Status}"/>
+                <DatePicker Date="{Binding SelectedTask.CreatedAt}"/>
+                <DatePicker Date="{Binding SelectedTask.UpdatedAt}"/>
+                <Button Text="Update"></Button>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

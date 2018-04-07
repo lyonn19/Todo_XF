@@ -17,21 +17,21 @@
             <Image Grid.Row="0" 
                 Grid.Column="0" 
                 Grid.ColumnSpan="2"
-                Source="{Binding Image}"/>
+                Source="{Binding Imagen}"/>
 
             <Label Grid.Row="0" 
                 Grid.Column="1"
                 Text="{Binding Content}"/>
 
-            <!--<Label Grid.Row="1" 
+            <Label Grid.Row="1" 
                 Grid.Column="1"
                 Text="{Binding UpdateAt}"/>
 
             <Switch 
                 Grid.Row="0" 
                 Grid.Column="2"
-                Grid.RowSpan="S2"
-                Toggled="{Binding Status}"/>-->
+                Grid.RowSpan="2"
+                IsToggled="{Binding Status}"/>
 
         </Grid>
 

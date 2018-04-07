@@ -1,27 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using com.company.todo.Data.Local;
+using com.company.todo.Models;
 using com.company.todo.ViewModels.Base;
 using Xamarin.Forms;
+using Task = System.Threading.Tasks.Task;
 
 namespace com.company.todo.ViewModels
 {
     public class TasksViewModel : ViewModelBase
     {
-        private ObservableCollection<Models.Task> PendingTasks;
-
-        private ObservableCollection<Models.Task> DoneTasks;
-
+        public ObservableCollection<ViewTask> PendingTasks { get; set; }
+        
+        public ViewTask ViewTask { get; set; }
 
         public TasksViewModel()
         {
-            PendingTasks = new ObservableCollection<Models.Task>();
-            DoneTasks = new ObservableCollection<Models.Task>();
+            PendingTasks = new ObservableCollection<ViewTask>();
+            
         }
 
         private int _countTask;
@@ -53,7 +54,14 @@ namespace com.company.todo.ViewModels
                 var result = await TaskDao.Instance.GetTasksAsync();
                 foreach (var item in result)
                 {
-                    PendingTasks.Add(item);
+                    PendingTasks.Add(new ViewTask()
+                    {
+                        Imagen = ImageSource.FromStream(() => new MemoryStream(item.Imagen)),
+                        Content = item.Content,
+                        CreatedAt = item.CreatedAt,
+                        Status = item.Status,
+                        UpdateAt = item.UpdateAt
+                    });
                 }
 
                 CountTask = PendingTasks.Count;
@@ -90,6 +98,7 @@ namespace com.company.todo.ViewModels
                 return;
             try
             {
+                PendingTasks.Clear();
                 IsBusy = true;
                 await GetTodoTask();
             }
@@ -101,4 +110,18 @@ namespace com.company.todo.ViewModels
 
 
     }
+    
+    public class ViewTask
+    {
+        public string Content { get; set; }
+
+        public DateTime CreatedAt { get; set; }
+
+        public DateTime UpdateAt { get; set; }
+
+        public bool Status { get; set; }
+
+        public ImageSource Imagen { get; set; }
+    }
+    
 }

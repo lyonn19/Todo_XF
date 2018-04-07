@@ -4,9 +4,11 @@
              x:Class="com.company.todo.Views.DetailTasks">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Image Source="{Binding SelectedTask.Imagen}"/>
+            <Label Text="{Binding SelectedTask.Content}"/>
+            <Label Text="{Binding SelectedTask.Status}"/>
+            <Label Text="{Binding SelectedTask.CreatedAt}"/>
+            <Label Text="{Binding SelectedTask.UpdatedAt}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

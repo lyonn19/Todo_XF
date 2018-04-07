@@ -46,6 +46,7 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\Task.cs" />
+    <Compile Include="Models\ViewTask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Navigation\INavigationService.cs" />
     <Compile Include="Services\Navigation\NavigationService.cs" />
@@ -55,6 +56,8 @@
     <Compile Include="ViewModels\Base\ViewModelBase.cs" />
     <Compile Include="ViewModels\Base\ViewModelLocator.cs" />
     <Compile Include="ViewModels\AddTasksViewModel.cs" />
+    <Compile Include="ViewModels\DetailTasksViewModel.cs" />
+    <Compile Include="ViewModels\EditTasksViewModel.cs" />
     <Compile Include="ViewModels\GalleryViewModel.cs" />
     <Compile Include="ViewModels\TasksViewModel.cs" />
     <Compile Include="Views\AddTasksPage.xaml.cs">
@@ -66,6 +69,7 @@
     <Compile Include="Views\DoneTasksPage.xaml.cs">
       <DependentUpon>DoneTasksPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\DoneTasksViewModel.cs" />
     <Compile Include="Views\EditTasksPage.xaml.cs">
       <DependentUpon>EditTasksPage.xaml</DependentUpon>
     </Compile>
