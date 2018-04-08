@@ -55,7 +55,7 @@ namespace com.company.todo.ViewModels
                         Content = item.Content,
                         CreatedAt = item.CreatedAt,
                         Status = item.Status,
-                        UpdateAt = item.UpdateAt
+                        UpdatedAt = item.UpdatedAt
                     });
                 }
             }
@@ -88,6 +88,16 @@ namespace com.company.todo.ViewModels
                 return new Command(async () =>
                 {
                     await Navigation.NavigateToAsync<DetailTodoViewModel>(SelectedTodoItem);
+                });
+            }
+        }
+        public ICommand NavigateToEdit
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    await Navigation.NavigateToAsync<EditTodoViewModel>(SelectedTodoItem);
                 });
             }
         }

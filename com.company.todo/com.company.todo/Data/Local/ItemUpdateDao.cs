@@ -31,16 +31,29 @@ namespace com.company.todo.Data.Local
             return Enumerable.Empty<ItemUpdate>();
         }
 
+        public async Task<IEnumerable<ItemUpdate>> GetItemUpdateByIdAsync(int id)
+        {
+            try
+            {
+                return await _dbConn.QueryAsync<ItemUpdate>("Select * from [ItemUpdate] Where Id = ?", id);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Failed to retrieve data. {0}", ex.Message);
+            }
+            return Enumerable.Empty<ItemUpdate>();
+        }
+
         public async Task AddItemUpdateAsync(ItemUpdate itemUpdate)
         {
             try
             {
                 var result = await _dbConn.InsertAsync(itemUpdate);
-                System.Diagnostics.Debug.WriteLine("{0} record(s) added [UpdateAt: {1})", result, itemUpdate.UpdateAt);
+                System.Diagnostics.Debug.WriteLine("{0} record(s) added [UpdateAt: {1})", result, itemUpdate.UpdatedAt);
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine("Failed to add {0}. Error: {1}", itemUpdate.UpdateAt, ex.Message);
+                System.Diagnostics.Debug.WriteLine("Failed to add {0}. Error: {1}", itemUpdate.UpdatedAt, ex.Message);
             }
         }
 
@@ -49,11 +62,11 @@ namespace com.company.todo.Data.Local
             try
             {
                 await _dbConn.UpdateAsync(itemUpdate);
-                System.Diagnostics.Debug.WriteLine("record(s) edited [UpdateAt: {0})", itemUpdate.UpdateAt);
+                System.Diagnostics.Debug.WriteLine("record(s) edited [UpdateAt: {0})", itemUpdate.UpdatedAt);
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine("Failed to edit {0}. Error: {1}", itemUpdate.UpdateAt, ex.Message);
+                System.Diagnostics.Debug.WriteLine("Failed to edit {0}. Error: {1}", itemUpdate.UpdatedAt, ex.Message);
             }
         }
 
@@ -62,11 +75,11 @@ namespace com.company.todo.Data.Local
             try
             {
                 await _dbConn.DeleteAsync(itemUpdate);
-                System.Diagnostics.Debug.WriteLine("record(s) deleted [UpdateAt: {0})", itemUpdate.UpdateAt);
+                System.Diagnostics.Debug.WriteLine("record(s) deleted [UpdateAt: {0})", itemUpdate.UpdatedAt);
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine("Failed to delete {0}. Error: {1}", itemUpdate.UpdateAt, ex.Message);
+                System.Diagnostics.Debug.WriteLine("Failed to delete {0}. Error: {1}", itemUpdate.UpdatedAt, ex.Message);
             }
         }
     }

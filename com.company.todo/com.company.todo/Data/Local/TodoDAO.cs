@@ -63,7 +63,16 @@ namespace com.company.todo.Data.Local
         {
             try
             {
+                // register update 
                 await _dbConn.UpdateAsync(todoItem);
+                
+                // register update details
+                await ItemUpdateDao.Instance.AddItemUpdateAsync(new ItemUpdate()
+                {
+                    Id = todoItem.Id,
+                    UpdatedAt = DateTime.Now
+                });
+                
                 System.Diagnostics.Debug.WriteLine("record(s) edited [Content: {0})",  todoItem.Content);
             }
             catch (Exception ex)

@@ -64,6 +64,7 @@
     <Compile Include="ViewModels\EditTodoViewModel.cs" />
     <Compile Include="ViewModels\MediaViewModel.cs" />
     <Compile Include="ViewModels\TodoViewModel.cs" />
+    <Compile Include="ViewModels\UpdateLogViewModel.cs" />
     <Compile Include="Views\AddTodoPage.xaml.cs">
       <DependentUpon>AddTodoPage.xaml</DependentUpon>
     </Compile>
@@ -79,6 +80,9 @@
     </Compile>
     <Compile Include="Views\TodoTasksPage.xaml.cs">
       <DependentUpon>TodoTasksPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UpdateLogPage.xaml.cs">
+      <DependentUpon>UpdateLogPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -148,7 +152,12 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Views\UpdateLogPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\TodoTasksPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>

@@ -99,6 +99,7 @@ namespace com.company.todo.Services.Navigation
             Mappings.Add(typeof(AddTodoViewModel), typeof(AddTodoPage));
             Mappings.Add(typeof(DetailTodoViewModel), typeof(DetailTodoPage));
             Mappings.Add(typeof(EditTodoViewModel), typeof(EditTodoPage));
+            Mappings.Add(typeof(UpdateLogViewModel), typeof(UpdateLogPage));
         }
     }
 }

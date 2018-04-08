@@ -5,7 +5,7 @@
              x:Class="com.company.todo.Views.TodoTasksPage"
              Title="My pending TODOs">
     <ContentPage.ToolbarItems>
-        <ToolbarItem x:Name="Save" Icon="ic_stat_add.png" Command="{Binding NavigateToAddTask}"/>
+        <ToolbarItem x:Name="Save" Icon="ic_stat_add.png" Command="{Binding NavigateToNewTodo}"/>
         <ToolbarItem Name="Flip" Order="Primary" Icon="ic_stat_arrow_forward.png" Priority="1" Clicked="MenuItem_OnClicked"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>

@@ -4,15 +4,17 @@
              x:Class="com.company.todo.Views.DetailTodoPage"
              Title="TODO Details">
     <ContentPage.ToolbarItems>
-        <ToolbarItem x:Name="Save" Icon="ic_stat_share.png" Clicked="Share"/>
+        <ToolbarItem x:Name="Log" Text="Logs" Command="{Binding NavigateToUpdateLog}"/>
+        <ToolbarItem x:Name="s" Icon="ic_stat_share.png" Clicked="Share"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout Padding="20">
             <Image Source="{Binding SelectedTodoItem.ImagenSource}"/>
             <Label Text="{Binding SelectedTodoItem.Content}"/>
-            <Label Text="{Binding SelectedTodoItem.Status}"/>
             <Label Text="{Binding SelectedTodoItem.CreatedAt}"/>
+            <Label Text="{Binding SelectedTodoItem.Status}"/>
             <Label Text="{Binding SelectedTodoItem.UpdatedAt}"/>
+            <ListView></ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

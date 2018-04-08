@@ -17,17 +17,7 @@ namespace com.company.todo.ViewModels
 {
     public class AddTodoViewModel : ViewModelBase
     {
-        #region Fields
-
-        #endregion
-
-        #region Builder
-        public AddTodoViewModel()
-        {
-        }
-        #endregion
-
-
+        
         #region Properties
         private string _content;
         public string Content
@@ -40,39 +30,7 @@ namespace com.company.todo.ViewModels
             }
         }
 
-        private DateTime _createdAt;
-        public DateTime CreatedAt
-        {
-            get { return _createdAt; }
-            set
-            {
-                _createdAt = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private DateTime _updateAt;
-        public DateTime UpdateAt
-        {
-            get { return _updateAt; }
-            set
-            {
-                _updateAt = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private bool _status;
-        public bool Status
-        {
-            get { return _status; }
-            set
-            {
-                _status = value;
-                OnPropertyChanged();
-            }
-        }
-
+        
         private ImageSource _imagen;
         public ImageSource ImagenSource
         {
@@ -111,7 +69,7 @@ namespace com.company.todo.ViewModels
                     CreatedAt = DateTime.Now,
                     Imagen = ViewModelLocator.Instance.Resolve<MediaViewModel>().PImage,
                     Status = false,
-                    UpdateAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now,
                 });
             }
             catch (Exception)

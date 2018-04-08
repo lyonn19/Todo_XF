@@ -69,7 +69,7 @@ namespace com.company.todo.ViewModels
                         Content = item.Content,
                         CreatedAt = item.CreatedAt,
                         Status = item.Status,
-                        UpdateAt = item.UpdateAt
+                        UpdatedAt = item.UpdatedAt
                     });
                 }
 
@@ -103,7 +103,7 @@ namespace com.company.todo.ViewModels
         //    MessagingCenter.Send(this, AppSettings.TransitionMessage, TransitionType.Flip);
         //}
 
-        public ICommand NavigateToAddTask
+        public ICommand NavigateToNewTodo
         {
             get
             {
@@ -113,8 +113,7 @@ namespace com.company.todo.ViewModels
                 });
             }
         }
-
-        public ICommand NavigateToDetailTask
+        public ICommand NavigateToDetail
         {
             get
             {

@@ -4,18 +4,20 @@
              x:Class="com.company.todo.Views.EditTodoPage"
              Title="Edit TODO">
     <ContentPage.Content>
-        <StackLayout Padding="20">
-            <StackLayout>
-                <Image Source="{Binding SelectedTodoItem.ImagenSource}"/>
-                <Entry Text="{Binding SelectedTodoItem.Content}"/>
-                <Label Text="{Binding SelectedTodoItem.Status}"/>
-                <Label Text="{Binding SelectedTodoItem.CreatedAt}"/>
-                <DatePicker Date="{Binding SelectedTodoItem.UpdatedAt, Mode=TwoWay}"/>
-                <StackLayout Orientation="Horizontal">
-                    <Button Text="Cancel" Clicked="Button_OnClicked"/>
-                    <Button Text="Save" Command="{Binding EditTodoCommand}"/>
+        <ScrollView>
+            <StackLayout Padding="20">
+                <StackLayout>
+                    <Image Source="{Binding SelectedTodoItem.ImagenSource}"/>
+                    <Entry Text="{Binding SelectedTodoItem.Content}"/>
+                    <Label Text="{Binding SelectedTodoItem.Status}"/>
+                    <Label Text="{Binding SelectedTodoItem.CreatedAt}" TextColor="Blue"/>
+                    <Label Text="{Binding SelectedTodoItem.UpdatedAt}" TextColor="Red"/>
+                    <StackLayout Orientation="Horizontal">
+                        <Button Text="Cancel" Clicked="Button_OnClicked"/>
+                        <Button Text="Save" Command="{Binding EditTodoCommand}"/>
+                    </StackLayout>
                 </StackLayout>
             </StackLayout>
-        </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

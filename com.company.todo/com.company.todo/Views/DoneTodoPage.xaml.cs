@@ -94,14 +94,14 @@ namespace com.company.todo.Views
             var todo = ((MenuItem)sender).CommandParameter as TodoItem;
             if (todo == null) return;
             ViewModelLocator.Instance.Resolve<DoneViewModel>().SelectedTodoItem = todo;
-            //ViewModelLocator.Instance.Resolve<DoneViewModel>().NavigateToEdit.Execute(null);
+            ViewModelLocator.Instance.Resolve<DoneViewModel>().NavigateToEdit.Execute(null);
         }
 
         public async void OnDelete(object sender, EventArgs e)
         {
             var todo = ((MenuItem)sender).CommandParameter as TodoItem;
             if (todo == null) return;
-            var answ = await DisplayAlert("Alert", "Are you Sure", "Cancel", "Accept");
+            var answ = await DisplayAlert("Alert", "Are you sure?", "Cancel", "Accept");
             if (answ) return;
             ViewModelLocator.Instance.Resolve<DoneViewModel>().SelectedTodoItem = todo;
             ViewModelLocator.Instance.Resolve<DoneViewModel>().DeleteTodoCommand.Execute(null);

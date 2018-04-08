@@ -105,7 +105,7 @@ namespace com.company.todo.Views
             if (task == null) return;
             ListViewTodo.SelectedItem = null;
             ViewModelLocator.Instance.Resolve<TodoViewModel>().SelectedTodoItem = task;
-            ViewModelLocator.Instance.Resolve<TodoViewModel>().NavigateToDetailTask.Execute(null);
+            ViewModelLocator.Instance.Resolve<TodoViewModel>().NavigateToDetail.Execute(null);
         }
 
         public void OnDone(object sender, EventArgs e)
@@ -131,7 +131,7 @@ namespace com.company.todo.Views
         {
             var todo = ((MenuItem) sender).CommandParameter as TodoItem;
             if (todo == null) return;
-            var answ = await DisplayAlert("Alert", "Are you Sure", "Cancel", "Accept");
+            var answ = await DisplayAlert("Alert", "Are you sure?", "Cancel", "Accept");
             if (answ) return;
             ViewModelLocator.Instance.Resolve<TodoViewModel>().SelectedTodoItem = todo;
             ViewModelLocator.Instance.Resolve<TodoViewModel>().DeleteTodoCommand.Execute(null);

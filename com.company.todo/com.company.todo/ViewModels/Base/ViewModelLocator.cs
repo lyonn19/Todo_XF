@@ -35,6 +35,7 @@ namespace com.company.todo.ViewModels.Base
             _container.RegisterType<AddTodoViewModel>(new ContainerControlledLifetimeManager());
             _container.RegisterType<DetailTodoViewModel>(new ContainerControlledLifetimeManager());
             _container.RegisterType<EditTodoViewModel>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<UpdateLogViewModel>(new ContainerControlledLifetimeManager());
             _container.RegisterType<MediaViewModel>(new ContainerControlledLifetimeManager());
 
             var unityServiceLocator = new UnityServiceLocator(_container);

@@ -39,5 +39,17 @@ namespace com.company.todo.ViewModels
             return base.InitializeAsync(navigationData);
         }
         #endregion
+
+
+        public ICommand NavigateToUpdateLog
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    await Navigation.NavigateToAsync<UpdateLogViewModel>(SelectedTodoItem);
+                });
+            }
+        }
     }
 }

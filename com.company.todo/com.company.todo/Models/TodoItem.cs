@@ -19,7 +19,7 @@ namespace com.company.todo.Models
 
         public DateTime CreatedAt { get; set; }
 
-        public DateTime UpdateAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
 
         public bool Status { get; set; }
         
@@ -32,7 +32,7 @@ namespace com.company.todo.Models
     public class ItemUpdate
     {
         public int Id { get; set; }
-        public DateTime UpdateAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
     }
 
 }

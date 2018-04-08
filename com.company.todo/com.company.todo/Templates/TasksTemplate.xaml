@@ -32,7 +32,7 @@
 
             <Label Grid.Row="1" 
                 Grid.Column="1"
-                Text="{Binding UpdateAt}"/>
+                Text="{Binding UpdatedAt}" TextColor="Red"/>
 
             <Label 
                 Grid.Row="0" 
