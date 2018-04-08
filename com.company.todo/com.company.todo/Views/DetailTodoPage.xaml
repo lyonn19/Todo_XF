@@ -2,12 +2,12 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="com.company.todo.Views.DetailTodoPage"
-             Title="Task Details">
+             Title="TODO Details">
     <ContentPage.ToolbarItems>
         <ToolbarItem x:Name="Save" Icon="ic_stat_share.png" Clicked="Share"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout Padding="20">
             <Image Source="{Binding SelectedTodoItem.ImagenSource}"/>
             <Label Text="{Binding SelectedTodoItem.Content}"/>
             <Label Text="{Binding SelectedTodoItem.Status}"/>

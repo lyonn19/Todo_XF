@@ -4,8 +4,8 @@
              xmlns:templates="clr-namespace:com.company.todo.Templates;assembly=com.company.todo"
              x:Class="com.company.todo.Views.DoneTodoPage"
              Title="My completed TODOs">
-        <ContentPage.Content>
-            <StackLayout>
+    <ContentPage.Content>
+        <StackLayout Padding="20">
             <SearchBar x:Name="SeachBarDoneTasks" 
                        SearchButtonPressed="SearchBar_OnSearchButtonPressed"
                        TextChanged="SearchBar_OnTextChanged"/>
@@ -19,8 +19,12 @@
                     <DataTemplate>
                         <ViewCell>
                             <ViewCell.ContextActions>
-                                <MenuItem Clicked="OnEdit" Text="Edit"/>
-                                <MenuItem Clicked="OnDelete" Text="Delete" IsDestructive="True" />
+                                <MenuItem Clicked="OnDone" CommandParameter="{Binding .}"
+                                    Text="Undo"/>
+                                <MenuItem Clicked="OnEdit" CommandParameter="{Binding .}"
+                                    Text="Edit"/>
+                                <MenuItem Clicked="OnDelete" IsDestructive="True" 
+                                    Text="Delete"  CommandParameter="{Binding .}"/>
                             </ViewCell.ContextActions>
                             <templates:TasksTemplate/>
                         </ViewCell>
@@ -28,5 +32,5 @@
                 </ListView.ItemTemplate>
             </ListView>
         </StackLayout>
-        </ContentPage.Content>
+    </ContentPage.Content>
 </ContentPage>

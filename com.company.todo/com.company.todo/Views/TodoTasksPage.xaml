@@ -23,10 +23,12 @@
                     <DataTemplate>
                         <ViewCell>
                             <ViewCell.ContextActions>
+                                <MenuItem Clicked="OnDone" CommandParameter="{Binding .}"
+                                    Text="Done" />
                                 <MenuItem Clicked="OnEdit" CommandParameter="{Binding .}"
                                     Text="Edit" />
                                 <MenuItem Clicked="OnDelete" CommandParameter="{Binding .}"
-                                    Text="Delete" IsDestructive="True" />
+                                    Text="Del" IsDestructive="True" />
                             </ViewCell.ContextActions>
                             <templates:TasksTemplate/>
                         </ViewCell>

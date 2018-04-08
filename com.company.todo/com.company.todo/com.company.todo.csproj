@@ -40,6 +40,7 @@
     </Compile>
     <Compile Include="AppSettings.cs" />
     <Compile Include="Control\TransitionNavigationPage.cs" />
+    <Compile Include="Converters\BoolToStringConverter.cs" />
     <Compile Include="Data\Base\BaseDatabase.cs" />
     <Compile Include="Data\Local\ItemUpdateDao.cs" />
     <Compile Include="Data\Local\TodoDAO.cs" />

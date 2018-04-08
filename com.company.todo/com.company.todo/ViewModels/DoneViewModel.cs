@@ -41,15 +41,16 @@ namespace com.company.todo.ViewModels
             return base.InitializeAsync(navigationData);
         }
 
-        private async Task GetDoneTask()
+        private async Task GetDone()
         {
             try
             {
-                var result = await TodoDao.Instance.GetTodoAsync();
+                var result = await TodoDao.Instance.GetDoneAsync();
                 foreach (var item in result)
                 {
-                    DoneItems.Add(new TodoItem()
+                    DoneItems.Add(new TodoItem
                     {
+                        Id = item.Id,
                         ImagenSource = ImageSource.FromStream(() => new MemoryStream(item.Imagen)),
                         Content = item.Content,
                         CreatedAt = item.CreatedAt,
@@ -107,7 +108,7 @@ namespace com.company.todo.ViewModels
             {
                 IsBusy = true;
                 DoneItems.Clear();
-                await GetDoneTask();
+                await GetDone();
             }
             finally
             {

@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using com.company.todo.ViewModels;
+using com.company.todo.ViewModels.Base;
 using SQLite;
 using Xamarin.Forms;
 
 namespace com.company.todo.Models
 {
-    public class TodoItem 
+    public class TodoItem
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
@@ -18,9 +20,9 @@ namespace com.company.todo.Models
         public DateTime CreatedAt { get; set; }
 
         public DateTime UpdateAt { get; set; }
-        
-        public bool Status { get; set; }
 
+        public bool Status { get; set; }
+        
         public byte[] Imagen { get; set; }
 
         [Ignore]

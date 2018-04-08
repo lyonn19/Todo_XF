@@ -1,8 +1,15 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:com.company.todo.Converters;assembly=com.company.todo"
              x:Class="com.company.todo.Templates.TasksTemplate">
-  <ContentView.Content>
+    
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <converters:BoolToStringConverter x:Key="BoolToStringConverter"/>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <ContentView.Content>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -27,11 +34,11 @@
                 Grid.Column="1"
                 Text="{Binding UpdateAt}"/>
 
-            <Switch 
+            <Label 
                 Grid.Row="0" 
                 Grid.Column="2"
                 Grid.RowSpan="2"
-                IsToggled="{Binding Status}"/>
+                Text="{Binding Status, Converter={StaticResource BoolToStringConverter}}"/>
 
         </Grid>
 

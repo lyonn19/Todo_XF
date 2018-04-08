@@ -24,7 +24,20 @@ namespace com.company.todo.Data.Local
         {
             try
             {
-                return await _dbConn.Table<TodoItem>().ToListAsync();
+                return await _dbConn.QueryAsync<TodoItem>("Select * from [TodoItem] Where Status = ?", false);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Failed to retrieve data. {0}", ex.Message);
+            }
+            return Enumerable.Empty<TodoItem>();
+        }
+
+        public async Task<IEnumerable<TodoItem>> GetDoneAsync()
+        {
+            try
+            {
+                return await _dbConn.QueryAsync<TodoItem>("Select * from [TodoItem] Where Status = ?", true);
             }
             catch (Exception ex)
             {

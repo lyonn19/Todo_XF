@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows.Input;
 using com.company.todo.Control;
@@ -20,7 +21,8 @@ namespace com.company.todo.ViewModels
     {
 
         public ObservableCollection<TodoItem> TodoItems { get; set; }
-        
+
+
         public TodoViewModel()
         {
             TodoItems = new ObservableCollection<TodoItem>();

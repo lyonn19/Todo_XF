@@ -12,12 +12,12 @@ namespace com.company.todo.ViewModels
 {
     public class DetailTodoViewModel : ViewModelBase
     {
-        
         public DetailTodoViewModel()
         {
             SelectedTodoItem = new TodoItem();
         }
 
+        #region Properties
         private TodoItem _selectedTodoItem;
         public TodoItem SelectedTodoItem
         {
@@ -29,11 +29,15 @@ namespace com.company.todo.ViewModels
             }
         }
 
+        #endregion
+
+        #region Funtions
         public override Task InitializeAsync(object navigationData)
         {
             if (navigationData != null)
                 SelectedTodoItem = (TodoItem)navigationData;
             return base.InitializeAsync(navigationData);
         }
+        #endregion
     }
 }

@@ -49,8 +49,7 @@ namespace com.company.todo.Views
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
-
-            MessagingCenter.Unsubscribe<TodoViewModel, TransitionType>(this, AppSettings.TransitionMessage);
+            //MessagingCenter.Unsubscribe<TodoViewModel, TransitionType>(this, AppSettings.TransitionMessage);
         }
 
         private void MenuItem_OnClicked(object sender, EventArgs e)
@@ -107,6 +106,17 @@ namespace com.company.todo.Views
             ListViewTodo.SelectedItem = null;
             ViewModelLocator.Instance.Resolve<TodoViewModel>().SelectedTodoItem = task;
             ViewModelLocator.Instance.Resolve<TodoViewModel>().NavigateToDetailTask.Execute(null);
+        }
+
+        public void OnDone(object sender, EventArgs e)
+        {
+            var todo = ((MenuItem)sender).CommandParameter as TodoItem;
+            if (todo == null) return;
+
+            todo.Status = true;
+            ViewModelLocator.Instance.Resolve<EditTodoViewModel>().SelectedTodoItem = todo;
+            ViewModelLocator.Instance.Resolve<EditTodoViewModel>().EditTodoCommand.Execute(null);
+            ViewModelLocator.Instance.Resolve<TodoViewModel>().TodoCommand.Execute(null);
         }
 
         public void OnEdit(object sender, EventArgs e)

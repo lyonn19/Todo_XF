@@ -25,6 +25,11 @@ namespace com.company.todo.Views
                 SeachBarDoneTasks.HeightRequest = 40.0;
             }
         }
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            ViewModelLocator.Instance.Resolve<DoneViewModel>().DoneCommand.Execute(null);
+        }
 
         /// <summary>
         /// Event OnSearchButtonPressed search task on search pressed
@@ -73,16 +78,33 @@ namespace com.company.todo.Views
             ViewModelLocator.Instance.Resolve<DoneViewModel>().NavigateToDetail.Execute(null);
         }
 
+        public void OnDone(object sender, EventArgs e)
+        {
+            var todo = ((MenuItem)sender).CommandParameter as TodoItem;
+            if (todo == null) return;
+
+            todo.Status = false;
+            ViewModelLocator.Instance.Resolve<EditTodoViewModel>().SelectedTodoItem = todo;
+            ViewModelLocator.Instance.Resolve<EditTodoViewModel>().EditTodoCommand.Execute(null);
+            ViewModelLocator.Instance.Resolve<DoneViewModel>().DoneCommand.Execute(null);
+        }
+        
         public void OnEdit(object sender, EventArgs e)
         {
-            var mi = ((MenuItem)sender);
-            DisplayAlert("Edit Context Action", mi.CommandParameter + " more context action", "OK");
+            var todo = ((MenuItem)sender).CommandParameter as TodoItem;
+            if (todo == null) return;
+            ViewModelLocator.Instance.Resolve<DoneViewModel>().SelectedTodoItem = todo;
+            //ViewModelLocator.Instance.Resolve<DoneViewModel>().NavigateToEdit.Execute(null);
         }
 
-        public void OnDelete(object sender, EventArgs e)
+        public async void OnDelete(object sender, EventArgs e)
         {
-            var mi = ((MenuItem)sender);
-            DisplayAlert("Delete Context Action", mi.CommandParameter + " delete context action", "OK");
+            var todo = ((MenuItem)sender).CommandParameter as TodoItem;
+            if (todo == null) return;
+            var answ = await DisplayAlert("Alert", "Are you Sure", "Cancel", "Accept");
+            if (answ) return;
+            ViewModelLocator.Instance.Resolve<DoneViewModel>().SelectedTodoItem = todo;
+            ViewModelLocator.Instance.Resolve<DoneViewModel>().DeleteTodoCommand.Execute(null);
         }
     }
 }
