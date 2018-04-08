@@ -54,7 +54,7 @@ namespace com.company.todo.ViewModels
         {
             try
             {
-                if(!ValidateForm())
+                if (!ValidateForm()) return;
                 await TodoDao.Instance.AddTodoAsync(new TodoItem
                 {
                     Content = Content,
@@ -79,7 +79,12 @@ namespace com.company.todo.ViewModels
         /// <returns></returns>
         private bool ValidateForm()
         {
-            return !string.IsNullOrEmpty(Content);
+            if (string.IsNullOrEmpty(Content))
+            {
+                Application.Current.MainPage.DisplayAlert("Alert", "Content can't be empty", "Accept");
+                return false;
+            }
+            return true;
         }
 
         #endregion
