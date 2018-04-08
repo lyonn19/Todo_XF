@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="com.company.todo.Views.EditTodoPage"
+             Title="Edit TODO">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout>
+                <Image Source="{Binding SelectedTodoItem.ImagenSource}"/>
+                <Entry Text="{Binding SelectedTodoItem.Content}"/>
+                <Label Text="{Binding SelectedTodoItem.Status}"/>
+                <Label Text="{Binding SelectedTodoItem.CreatedAt}"/>
+                <DatePicker Date="{Binding SelectedTodoItem.UpdatedAt, Mode=TwoWay}"/>
+                <StackLayout Orientation="Horizontal">
+                    <Button Text="Cancel" Clicked="Button_OnClicked"/>
+                    <Button Text="Save" Command="{Binding EditTodoCommand}"/>
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

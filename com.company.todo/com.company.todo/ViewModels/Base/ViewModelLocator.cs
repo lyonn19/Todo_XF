@@ -11,9 +11,9 @@ namespace com.company.todo.ViewModels.Base
 {
     public class ViewModelLocator
     {
-        private static AddTasksViewModel _tasksViewModel;
-        public static AddTasksViewModel TasksViewModel
-            => _tasksViewModel ?? (_tasksViewModel = new AddTasksViewModel());
+        private static AddTodoViewModel _tasksViewModel;
+        public static AddTodoViewModel TasksViewModel
+            => _tasksViewModel ?? (_tasksViewModel = new AddTodoViewModel());
 
         private readonly IUnityContainer _container;
 
@@ -30,9 +30,12 @@ namespace com.company.todo.ViewModels.Base
             // repository
 
             // viewmodels
-            _container.RegisterType<AddTasksViewModel>(new ContainerControlledLifetimeManager());
-            _container.RegisterType<TasksViewModel>(new ContainerControlledLifetimeManager());
-            _container.RegisterType<GalleryViewModel>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<TodoViewModel>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<DoneViewModel>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<AddTodoViewModel>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<DetailTodoViewModel>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<EditTodoViewModel>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<MediaViewModel>(new ContainerControlledLifetimeManager());
 
             var unityServiceLocator = new UnityServiceLocator(_container);
             ServiceLocator.SetLocatorProvider(() => unityServiceLocator);

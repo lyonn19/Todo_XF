@@ -5,69 +5,70 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using com.company.todo.Data.Base;
+using com.company.todo.Models;
 using Xamarin.Forms.Xaml;
 
 namespace com.company.todo.Data.Local
 {
-    public class TaskDao : BaseDatabase
+    public class TodoDao : BaseDatabase
     {
-        private static TaskDao _instance;
-        public static TaskDao Instance => _instance ?? (_instance = new TaskDao());
+        private static TodoDao _instance;
+        public static TodoDao Instance => _instance ?? (_instance = new TodoDao());
 
-        public TaskDao()
+        public TodoDao()
         {
-            _dbConn.CreateTableAsync<Models.Task>().Wait();
+            _dbConn.CreateTableAsync<TodoItem>().Wait();
         }
 
-        public async Task<IEnumerable<Models.Task>> GetTasksAsync()
+        public async Task<IEnumerable<TodoItem>> GetTodoAsync()
         {
             try
             {
-                return await _dbConn.Table<Models.Task>().ToListAsync();
+                return await _dbConn.Table<TodoItem>().ToListAsync();
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine("Failed to retrieve data. {0}", ex.Message);
             }
-            return Enumerable.Empty<Models.Task>();
+            return Enumerable.Empty<TodoItem>();
         }
 
-        public async Task AddTaskAsync(Models.Task task)
+        public async Task AddTodoAsync(TodoItem todoItem)
         {
             try
             {
-                var result = await _dbConn.InsertAsync(task);
-                System.Diagnostics.Debug.WriteLine("{0} record(s) added [Contet: {1})", result, task.Content);
+                var result = await _dbConn.InsertAsync(todoItem);
+                System.Diagnostics.Debug.WriteLine("{0} record(s) added [Content: {1})", result, todoItem.Content);
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine("Failed to add {0}. Error: {1}", task.Content, ex.Message);
+                System.Diagnostics.Debug.WriteLine("Failed to add {0}. Error: {1}", todoItem.Content, ex.Message);
             }
         }
 
-        public async Task EditTaskAsync(Models.Task task)
+        public async Task EditTodoAsync(TodoItem todoItem)
         {
             try
             {
-                var result = await _dbConn.UpdateAsync(task);
-                System.Diagnostics.Debug.WriteLine("{0} record(s) added [Contet: {1})", result, task.Content);
+                await _dbConn.UpdateAsync(todoItem);
+                System.Diagnostics.Debug.WriteLine("record(s) edited [Content: {0})",  todoItem.Content);
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine("Failed to add {0}. Error: {1}", task.Content, ex.Message);
+                System.Diagnostics.Debug.WriteLine("Failed to edit {0}. Error: {1}", todoItem.Content, ex.Message);
             }
         }
 
-        public async Task DeleteTaskAsync(Models.Task task)
+        public async Task DeleteTodoAsync(TodoItem todoItem)
         {
             try
             {
-                var result = await _dbConn.DeleteAsync(task);
-                System.Diagnostics.Debug.WriteLine("{0} record(s) added [Contet: {1})", result, task.Content);
+                await _dbConn.DeleteAsync(todoItem);
+                System.Diagnostics.Debug.WriteLine("record(s) deleted [Content: {0})", todoItem.Content);
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine("Failed to add {0}. Error: {1}", task.Content, ex.Message);
+                System.Diagnostics.Debug.WriteLine("Failed to delete {0}. Error: {1}", todoItem.Content, ex.Message);
             }
         }
 

@@ -23,7 +23,7 @@ namespace com.company.todo.Services.Navigation
 
         public Task InitializeAsync()
         {
-            return NavigateToAsync<TasksViewModel>();
+            return NavigateToAsync<TodoViewModel>();
         }
 
         
@@ -94,8 +94,11 @@ namespace com.company.todo.Services.Navigation
 
         private void CreatePageViewModelMappings()
         {
-            Mappings.Add(typeof(AddTasksViewModel), typeof(AddTasksPage));
-            Mappings.Add(typeof(TasksViewModel), typeof(TodoTasksPage));
+            Mappings.Add(typeof(TodoViewModel), typeof(TodoTasksPage));
+            Mappings.Add(typeof(DoneViewModel), typeof(DoneTodoPage));
+            Mappings.Add(typeof(AddTodoViewModel), typeof(AddTodoPage));
+            Mappings.Add(typeof(DetailTodoViewModel), typeof(DetailTodoPage));
+            Mappings.Add(typeof(EditTodoViewModel), typeof(EditTodoPage));
         }
     }
 }

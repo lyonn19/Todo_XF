@@ -9,19 +9,20 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using com.company.todo.Data.Local;
+using com.company.todo.Models;
 using com.company.todo.ViewModels.Base;
 using Xamarin.Forms;
 
 namespace com.company.todo.ViewModels
 {
-    public class AddTasksViewModel : ViewModelBase
+    public class AddTodoViewModel : ViewModelBase
     {
         #region Fields
 
         #endregion
 
         #region Builder
-        public AddTasksViewModel()
+        public AddTodoViewModel()
         {
         }
         #endregion
@@ -73,7 +74,7 @@ namespace com.company.todo.ViewModels
         }
 
         private ImageSource _imagen;
-        public ImageSource Imagen
+        public ImageSource ImagenSource
         {
             get { return _imagen; }
             set
@@ -100,15 +101,15 @@ namespace com.company.todo.ViewModels
         /// Add new Task persist local
         /// </summary>
         /// <returns></returns>
-        private async Task AddTask()
+        private async Task AddTodo()
         {
             try
             {
-                await TaskDao.Instance.AddTaskAsync(new Models.Task()
+                await TodoDao.Instance.AddTodoAsync(new TodoItem
                 {
                     Content = Content,
                     CreatedAt = DateTime.Now,
-                    Imagen = ViewModelLocator.Instance.Resolve<GalleryViewModel>().PImage,
+                    Imagen = ViewModelLocator.Instance.Resolve<MediaViewModel>().PImage,
                     Status = false,
                     UpdateAt = DateTime.Now,
                 });
@@ -124,22 +125,22 @@ namespace com.company.todo.ViewModels
 
         #region Commands
 
-        Command _addTaskCommand;
-        public Command AddTaskCommand
+        Command _addTodoCommand;
+        public Command AddTodoCommand
         {
             get
             {
-                return _addTaskCommand ?? (_addTaskCommand = new Command(async () => await AddTaskAsync(), () => !IsBusy));
+                return _addTodoCommand ?? (_addTodoCommand = new Command(async () => await AddTodoAsync(), () => !IsBusy));
             }
         }
-        public async Task AddTaskAsync()
+        public async Task AddTodoAsync()
         {
             if (IsBusy)
                 return;
             try
             {
                 IsBusy = true;
-                await AddTask();
+                await AddTodo();
             }
             finally
             {

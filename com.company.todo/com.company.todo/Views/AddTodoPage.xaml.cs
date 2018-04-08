@@ -11,12 +11,12 @@ using Xamarin.Forms.Xaml;
 namespace com.company.todo.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AddTasksPage : ContentPage
+    public partial class AddTodoPage : ContentPage
     {
-        public AddTasksPage()
+        public AddTodoPage()
         {
             InitializeComponent();
-            BindingContext = ViewModelLocator.Instance.Resolve<AddTasksViewModel>();
+            BindingContext = ViewModelLocator.Instance.Resolve<AddTodoViewModel>();
         }
 
         private async void Button_OnClicked(object sender, EventArgs e)
@@ -26,10 +26,10 @@ namespace com.company.todo.Views
             switch (response)
             {
                 case "Camera":
-                    ViewModelLocator.Instance.Resolve<GalleryViewModel>().CameraCommand.Execute(null);
+                    ViewModelLocator.Instance.Resolve<MediaViewModel>().CameraCommand.Execute(null);
                     break;
                 case "Gallery":
-                    ViewModelLocator.Instance.Resolve<GalleryViewModel>().GalleryCommand.Execute(null);
+                    ViewModelLocator.Instance.Resolve<MediaViewModel>().GalleryCommand.Execute(null);
                     break;
             }
         }

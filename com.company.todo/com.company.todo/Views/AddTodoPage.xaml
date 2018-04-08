@@ -1,9 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="com.company.todo.Views.AddTasksPage">
+             x:Class="com.company.todo.Views.AddTodoPage"
+             Title="Create New TODO">
     <ContentPage.ToolbarItems>
-        <ToolbarItem x:Name="Save" Text="Add" Command="{Binding AddTaskCommand}"/>
+        <ToolbarItem x:Name="Save" Icon="ic_stat_check.png" Command="{Binding AddTodoCommand}"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <Grid>
@@ -16,14 +17,15 @@
             <Label Grid.Row="0"
                 Text="Content"  />
             <Entry Grid.Row="1"
-                Placeholder="Task Name" 
                 Text="{Binding Content}"/>
             <Image
 			    Grid.Row="2"
                 Margin="30"
-			    Source="{Binding Imagen}">
+			    Source="{Binding ImagenSource}">
             </Image>
-            <Button Text="Attach Picture" 
+            <Button Image="ic_shortcut_linked_camera.png" 
+                WidthRequest="60"
+                VerticalOptions="Center"    
                 Clicked="Button_OnClicked"
                 Grid.Row="3"/>
         </Grid>

@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:templates="clr-namespace:com.company.todo.Templates;assembly=com.company.todo"
+             x:Class="com.company.todo.Views.DoneTodoPage"
+             Title="My completed TODOs">
+        <ContentPage.Content>
+            <StackLayout>
+            <SearchBar x:Name="SeachBarDoneTasks" 
+                       SearchButtonPressed="SearchBar_OnSearchButtonPressed"
+                       TextChanged="SearchBar_OnTextChanged"/>
+            <ListView x:Name="ListViewTasks" ItemsSource="{Binding DoneItems}" 
+                    ItemTapped="Handle_ItemTapped" 
+                    BackgroundColor="Transparent"
+                    SelectedItem="{Binding SelectedTodoItem}"
+                    CachingStrategy="RecycleElement" 
+                    VerticalOptions="FillAndExpand">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.ContextActions>
+                                <MenuItem Clicked="OnEdit" Text="Edit"/>
+                                <MenuItem Clicked="OnDelete" Text="Delete" IsDestructive="True" />
+                            </ViewCell.ContextActions>
+                            <templates:TasksTemplate/>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+        </ContentPage.Content>
+</ContentPage>

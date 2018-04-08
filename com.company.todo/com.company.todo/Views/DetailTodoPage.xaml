@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="com.company.todo.Views.DetailTodoPage"
+             Title="Task Details">
+    <ContentPage.Content>
+        <StackLayout>
+            <Image Source="{Binding SelectedTodoItem.ImagenSource}"/>
+            <Label Text="{Binding SelectedTodoItem.Content}"/>
+            <Label Text="{Binding SelectedTodoItem.Status}"/>
+            <Label Text="{Binding SelectedTodoItem.CreatedAt}"/>
+            <Label Text="{Binding SelectedTodoItem.UpdatedAt}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

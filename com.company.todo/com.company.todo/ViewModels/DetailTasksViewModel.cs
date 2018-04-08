@@ -3,31 +3,36 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using com.company.todo.Models;
 using com.company.todo.ViewModels.Base;
+using Xamarin.Forms;
 
 namespace com.company.todo.ViewModels
 {
-    public class DetailTasksViewModel : ViewModelBase
+    public class DetailTodoViewModel : ViewModelBase
     {
-        private Models.Task _selectedTask;
-        private Models.Task SelectedTask
+        
+        public DetailTodoViewModel()
         {
-            get { return _selectedTask; }
+            SelectedTodoItem = new TodoItem();
+        }
+
+        private TodoItem _selectedTodoItem;
+        public TodoItem SelectedTodoItem
+        {
+            get { return _selectedTodoItem; }
             set
             {
-                _selectedTask = value;
+                _selectedTodoItem = value;
                 OnPropertyChanged();
             }
         }
 
-        public DetailTasksViewModel()
-        {
-            SelectedTask = new Models.Task();
-        }
-
-
         public override Task InitializeAsync(object navigationData)
         {
+            if (navigationData != null)
+                _selectedTodoItem = (TodoItem)navigationData;
             return base.InitializeAsync(navigationData);
         }
     }

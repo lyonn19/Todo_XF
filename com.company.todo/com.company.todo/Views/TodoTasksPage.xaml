@@ -5,22 +5,29 @@
              x:Class="com.company.todo.Views.TodoTasksPage"
              Title="My pending TODOs">
     <ContentPage.ToolbarItems>
-        <ToolbarItem x:Name="Save" Text="Add" Command="{Binding NavigateToAddTask}"/>
-        <ToolbarItem Name="Flip" Order="Primary" Icon="icon.png" Text="Item 2" Priority="1" Clicked="MenuItem_OnClicked"/>
+        <ToolbarItem x:Name="Save" Icon="ic_stat_add.png" Command="{Binding NavigateToAddTask}"/>
+        <ToolbarItem Name="Flip" Order="Primary" Icon="ic_stat_arrow_forward.png" Priority="1" Clicked="MenuItem_OnClicked"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout Padding="20">
             <SearchBar x:Name="SeachBarTodoTasks" 
                        SearchButtonPressed="SearchBar_OnSearchButtonPressed"
                        TextChanged="SearchBar_OnTextChanged"/>
-            
-            <ListView x:Name="ListViewTasks" ItemsSource="{Binding PendingTasks}" 
+
+            <ListView x:Name="ListViewTodo" ItemsSource="{Binding TodoItems}" 
                       ItemTapped="Handle_ItemTapped" 
+                      SelectedItem="{Binding SelectedTodoItem}"
                       BackgroundColor="Transparent"
                       VerticalOptions="FillAndExpand">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
+                            <ViewCell.ContextActions>
+                                <MenuItem Clicked="OnEdit" CommandParameter="{Binding .}"
+                                    Text="Edit" />
+                                <MenuItem Clicked="OnDelete" CommandParameter="{Binding .}"
+                                    Text="Delete" IsDestructive="True" />
+                            </ViewCell.ContextActions>
                             <templates:TasksTemplate/>
                         </ViewCell>
                     </DataTemplate>

@@ -3,18 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using com.company.todo.ViewModels;
+using com.company.todo.ViewModels.Base;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace com.company.todo.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class DetailTasks : ContentPage
+    public partial class DetailTodoPage : ContentPage
     {
-        public DetailTasks()
+        public DetailTodoPage()
         {
             InitializeComponent();
+            BindingContext = ViewModelLocator.Instance.Resolve<DetailTodoViewModel>();
         }
     }
 }
