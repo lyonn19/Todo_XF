@@ -56,7 +56,7 @@ namespace com.company.todo.ViewModels
             try
             {
                 await TodoDao.Instance.EditTodoAsync(SelectedTodoItem);
-                await Application.Current.MainPage.Navigation.PopAsync(false);
+                //await Application.Current.MainPage.Navigation.PopAsync(false);
             }
             catch (Exception)
             {

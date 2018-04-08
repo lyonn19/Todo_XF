@@ -54,6 +54,7 @@ namespace com.company.todo.ViewModels
         {
             try
             {
+                if(!ValidateForm())
                 await TodoDao.Instance.AddTodoAsync(new TodoItem
                 {
                     Content = Content,
@@ -71,7 +72,16 @@ namespace com.company.todo.ViewModels
             }
             
         }
-        
+
+        /// <summary>
+        /// Validate Content in Add todoItem
+        /// </summary>
+        /// <returns></returns>
+        private bool ValidateForm()
+        {
+            return !string.IsNullOrEmpty(Content);
+        }
+
         #endregion
 
         #region Commands

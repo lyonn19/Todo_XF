@@ -2,11 +2,12 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:templates="clr-namespace:com.company.todo.Templates;assembly=com.company.todo"
+             xmlns:customRenders="clr-namespace:com.company.todo.CustomRenders;assembly=com.company.todo"
              x:Class="com.company.todo.Views.DoneTodoPage"
              Title="My completed TODOs">
     <ContentPage.Content>
         <StackLayout Padding="20">
-            <SearchBar x:Name="SeachBarDoneTasks" 
+            <customRenders:CustomSearchBar x:Name="SeachBarDoneTasks" 
                        SearchButtonPressed="SearchBar_OnSearchButtonPressed"
                        TextChanged="SearchBar_OnTextChanged"/>
             <ListView x:Name="ListViewTasks" ItemsSource="{Binding DoneItems}" 

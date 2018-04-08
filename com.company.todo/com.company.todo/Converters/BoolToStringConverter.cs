@@ -16,7 +16,7 @@ namespace com.company.todo.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var status = "Pending";
+            var status = "Todo";
             if ((bool)value)
             {
                 status = "Done";
