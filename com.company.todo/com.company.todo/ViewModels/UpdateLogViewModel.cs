@@ -16,14 +16,18 @@ namespace com.company.todo.ViewModels
 {
     public class UpdateLogViewModel : ViewModelBase
     {
+        #region Fields
+        public ObservableCollection<ItemUpdate> UpdateLogs { get; set; }
+        #endregion
 
-        public ObservableCollection<ItemUpdate> UpdateLogss;
-        
+        #region Builder
         public UpdateLogViewModel()
         {
-            UpdateLogss = new ObservableCollection<ItemUpdate>();
+            UpdateLogs = new ObservableCollection<ItemUpdate>();
         }
+        #endregion
 
+        #region Properties
         private TodoItem _selectedTodoItem;
         public TodoItem SelectedTodoItem
         {
@@ -35,19 +39,62 @@ namespace com.company.todo.ViewModels
             }
         }
 
+        private int _count;
+        public int Count
+        {
+            get { return _count; }
+            set
+            {
+                _count = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region Methods
+        /// <summary>
+        /// Init ViewModel
+        /// </summary>
+        /// <param name="navigationData"></param>
+        /// <returns></returns>
         public override Task InitializeAsync(object navigationData)
         {
             if (navigationData != null)
             {
                 SelectedTodoItem = (TodoItem)navigationData;
-
+                EditTodoCommand.Execute(null);
             }
-            
             return base.InitializeAsync(navigationData);
         }
-
         
+        /// <summary>
+        /// Get UpdateLog from local databse by Itemtodo Id
+        /// </summary>
+        /// <returns></returns>
+        private async Task GetUpdateLogs()
+        {
+            try
+            {
+                var result = await ItemUpdateDao.Instance.GetItemUpdateByIdAsync(SelectedTodoItem.Id);
+                var itemUpdates = result as ItemUpdate[] ?? result.ToArray();
+                foreach (var item in itemUpdates)
+                {
+                    UpdateLogs.Add(new ItemUpdate()
+                    {
+                        Id = item.Id,
+                        UpdatedAt = item.UpdatedAt
+                    });
+                }
+                Count = itemUpdates.Count();
+            }
+            catch (Exception)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", "Error getting TODO, try again", "OK");
+            }
+        }
+        #endregion
 
+        #region Command
         Command _updateLogsCommand;
         public Command EditTodoCommand
         {
@@ -56,6 +103,7 @@ namespace com.company.todo.ViewModels
                 return _updateLogsCommand ?? (_updateLogsCommand = new Command(async () => await UpdateLogAsync(), () => !IsBusy));
             }
         }
+
         public async Task UpdateLogAsync()
         {
             if (IsBusy)
@@ -63,6 +111,7 @@ namespace com.company.todo.ViewModels
             try
             {
                 IsBusy = true;
+                UpdateLogs.Clear();
                 await GetUpdateLogs();
             }
             finally
@@ -70,48 +119,6 @@ namespace com.company.todo.ViewModels
                 IsBusy = false;
             }
         }
-
-        private async Task GetUpdateLogs()
-        {
-            try
-            {
-                var result = await ItemUpdateDao.Instance.GetItemUpdateByIdAsync(SelectedTodoItem.Id);
-                foreach (var item in result)
-                {
-                    UpdateLogss.Add(new ItemUpdate()
-                    {
-                        Id = item.Id,
-                        UpdatedAt = item.UpdatedAt
-                    });
-                }
-
-            }
-            catch (Exception)
-            {
-                await Application.Current.MainPage.DisplayAlert("Error", "Error getting TODO, try again", "OK");
-            }
-        }
-
-        //private Task GetUpdateLogs
-        //{
-        //try
-        //{
-        //var result = await ItemUpdateDao.Instance.GetItemUpdateAsync(selete);
-        //foreach (var item in result)
-        // {
-        //UpdateLogss.Add(new String
-        //{
-        //    item.
-        //});
-        //}
-
-        //}
-        //catch (Exception)
-        //{
-        //    await Application.Current.MainPage.DisplayAlert("Error", "Error getting TODO, try again", "OK");
-        //}
-        //}
-
-
+        #endregion
     }
 }

@@ -10,18 +10,18 @@ using Xamarin.Forms.Xaml;
 namespace com.company.todo.Converters
 {
     /// <summary>
-    /// Converter Bool To String Converter
+    /// Converter Bool To Color Converter
     /// </summary>
-    public class BoolToStringConverter : IValueConverter, IMarkupExtension
+    public class BoolToColorConverter : IValueConverter, IMarkupExtension
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var status = "Pending";
+            var color = Color.Red;
             if ((bool)value)
             {
-                status = "Done";
+                color = Color.Blue;
             }
-            return status;
+            return color;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

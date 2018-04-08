@@ -1,23 +1,61 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:com.company.todo.Converters;assembly=com.company.todo"
              x:Class="com.company.todo.Views.EditTodoPage"
              Title="Edit TODO">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:BoolToStringConverter x:Key="BoolToStringConverter"/>
+            <converters:BoolToColorConverter x:Key="BoolToColorConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout Padding="20">
-                <StackLayout>
-                    <Image Source="{Binding SelectedTodoItem.ImagenSource}"/>
-                    <Entry Text="{Binding SelectedTodoItem.Content}"/>
-                    <Label Text="{Binding SelectedTodoItem.Status}"/>
-                    <Label Text="{Binding SelectedTodoItem.CreatedAt}" TextColor="Blue"/>
-                    <Label Text="{Binding SelectedTodoItem.UpdatedAt}" TextColor="Red"/>
-                    <StackLayout Orientation="Horizontal">
-                        <Button Text="Cancel" Clicked="Button_OnClicked"/>
-                        <Button Text="Save" Command="{Binding EditTodoCommand}"/>
-                    </StackLayout>
-                </StackLayout>
-            </StackLayout>
+            <Grid Padding="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="300"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="5*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0"
+                    Text="Attachment"/>
+                <Image Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                    Source="{Binding SelectedTodoItem.ImagenSource}"/>
+                <Label Grid.Row="2" Grid.Column="0"
+                    Text="Content"/>
+                <Entry Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+                    Text="{Binding SelectedTodoItem.Content}"/>
+                <Label Grid.Row="4" Grid.Column="0"
+                    Text="Status:"/>
+                <Label Grid.Row="4" Grid.Column="1"
+                    Text="{Binding SelectedTodoItem.Status, Converter={StaticResource BoolToStringConverter}}"
+                TextColor="{Binding SelectedTodoItem.Status, Converter={StaticResource BoolToColorConverter}}"/>
+                <Label Grid.Row="5" Grid.Column="0"
+                    Text="Created:"/>
+                <Label Grid.Row="5" Grid.Column="1"
+                    Text="{Binding SelectedTodoItem.CreatedAt}"/>
+                <Label Grid.Row="6" Grid.Column="0"
+                    Text="Updated:"/>
+                <Label Grid.Row="6" Grid.Column="1"
+                    Text="{Binding SelectedTodoItem.UpdatedAt}"/>
+                <Button  Grid.Row="8" Grid.Column="0"
+                    Text="Cancel" Clicked="Button_OnClicked"/>
+                <Button Grid.Row="8" Grid.Column="1"
+                    Text="Save" Command="{Binding EditTodoCommand}"/>
+            </Grid>
         </ScrollView>
     </ContentPage.Content>
 </ContentPage>

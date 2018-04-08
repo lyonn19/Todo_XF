@@ -10,13 +10,19 @@ using Xamarin.Forms;
 
 namespace com.company.todo.ViewModels
 {
+    /// <summary>
+    /// ViewModel for EditTodoPage edit todoItem
+    /// </summary>
     public class EditTodoViewModel : ViewModelBase
     {
+        #region Builder
         public EditTodoViewModel()
         {
             SelectedTodoItem = new TodoItem();
         }
+        #endregion
 
+        #region Properties
         private TodoItem _selectedTodoItem;
         public TodoItem SelectedTodoItem
         {
@@ -27,25 +33,34 @@ namespace com.company.todo.ViewModels
                 OnPropertyChanged();
             }
         }
+        #endregion
 
-        #region Funtions
+        #region Methods
+        /// <summary>
+        /// Init ViewModel
+        /// </summary>
+        /// <param name="navigationData"></param>
+        /// <returns></returns>
         public override Task InitializeAsync(object navigationData)
         {
             if (navigationData != null)
                 SelectedTodoItem = (TodoItem)navigationData;
             return base.InitializeAsync(navigationData);
         }
-
+        /// <summary>
+        /// Edit todoItem from local database
+        /// </summary>
+        /// <returns></returns>
         private async Task EditTodo()
         {
             try
             {
                 await TodoDao.Instance.EditTodoAsync(SelectedTodoItem);
+                await Application.Current.MainPage.Navigation.PopAsync(false);
             }
             catch (Exception)
             {
                 await Application.Current.MainPage.DisplayAlert("Error", "Error occured", "OK");
-                throw;
             }
         }
         #endregion

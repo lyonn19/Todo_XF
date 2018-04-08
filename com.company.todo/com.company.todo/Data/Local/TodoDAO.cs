@@ -10,6 +10,9 @@ using Xamarin.Forms.Xaml;
 
 namespace com.company.todo.Data.Local
 {
+    /// <summary>
+    /// DAO for TODOs Objects CRUD implemented
+    /// </summary>
     public class TodoDao : BaseDatabase
     {
         private static TodoDao _instance;
@@ -19,7 +22,10 @@ namespace com.company.todo.Data.Local
         {
             _dbConn.CreateTableAsync<TodoItem>().Wait();
         }
-
+        /// <summary>
+        /// Get todoItem status pending
+        /// </summary>
+        /// <returns></returns>
         public async Task<IEnumerable<TodoItem>> GetTodoAsync()
         {
             try
@@ -32,7 +38,10 @@ namespace com.company.todo.Data.Local
             }
             return Enumerable.Empty<TodoItem>();
         }
-
+        /// <summary>
+        /// Get todoItems status done
+        /// </summary>
+        /// <returns></returns>
         public async Task<IEnumerable<TodoItem>> GetDoneAsync()
         {
             try
@@ -45,7 +54,11 @@ namespace com.company.todo.Data.Local
             }
             return Enumerable.Empty<TodoItem>();
         }
-
+        /// <summary>
+        /// Add new todoItem
+        /// </summary>
+        /// <param name="todoItem"></param>
+        /// <returns></returns>
         public async Task AddTodoAsync(TodoItem todoItem)
         {
             try
@@ -58,12 +71,16 @@ namespace com.company.todo.Data.Local
                 System.Diagnostics.Debug.WriteLine("Failed to add {0}. Error: {1}", todoItem.Content, ex.Message);
             }
         }
-
+        /// <summary>
+        /// Edit and todoItem and register in ItemUpdates to accomplish (Master/Detail)
+        /// </summary>
+        /// <param name="todoItem"></param>
+        /// <returns></returns>
         public async Task EditTodoAsync(TodoItem todoItem)
         {
             try
             {
-                // register update 
+                // register update master
                 await _dbConn.UpdateAsync(todoItem);
                 
                 // register update details
@@ -80,7 +97,11 @@ namespace com.company.todo.Data.Local
                 System.Diagnostics.Debug.WriteLine("Failed to edit {0}. Error: {1}", todoItem.Content, ex.Message);
             }
         }
-
+        /// <summary>
+        /// Delete todoItem 
+        /// </summary>
+        /// <param name="todoItem"></param>
+        /// <returns></returns>
         public async Task DeleteTodoAsync(TodoItem todoItem)
         {
             try

@@ -38,8 +38,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AppSettings.cs" />
-    <Compile Include="Control\TransitionNavigationPage.cs" />
+    <Compile Include="Converters\BoolToColorConverter.cs" />
     <Compile Include="Converters\BoolToStringConverter.cs" />
     <Compile Include="Data\Base\BaseDatabase.cs" />
     <Compile Include="Data\Local\ItemUpdateDao.cs" />
@@ -47,9 +46,6 @@
     <Compile Include="DependencyService\IImageResize.cs" />
     <Compile Include="DependencyService\IShareServices.cs" />
     <Compile Include="DependencyService\ISqlite.cs" />
-    <Compile Include="MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Models\TodoItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Navigation\INavigationService.cs" />
@@ -60,7 +56,7 @@
     <Compile Include="ViewModels\Base\ViewModelBase.cs" />
     <Compile Include="ViewModels\Base\ViewModelLocator.cs" />
     <Compile Include="ViewModels\AddTodoViewModel.cs" />
-    <Compile Include="ViewModels\DetailTasksViewModel.cs" />
+    <Compile Include="ViewModels\DetailTodoViewModel.cs" />
     <Compile Include="ViewModels\EditTodoViewModel.cs" />
     <Compile Include="ViewModels\MediaViewModel.cs" />
     <Compile Include="ViewModels\TodoViewModel.cs" />
@@ -78,18 +74,14 @@
     <Compile Include="Views\EditTodoPage.xaml.cs">
       <DependentUpon>EditTodoPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\TodoTasksPage.xaml.cs">
-      <DependentUpon>TodoTasksPage.xaml</DependentUpon>
+    <Compile Include="Views\TodoPage.xaml.cs">
+      <DependentUpon>TodoPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UpdateLogPage.xaml.cs">
       <DependentUpon>UpdateLogPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="MainPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Include="App.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
@@ -159,7 +151,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\TodoTasksPage.xaml">
+    <EmbeddedResource Include="Views\TodoPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

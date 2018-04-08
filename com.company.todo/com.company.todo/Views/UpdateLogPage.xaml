@@ -2,20 +2,28 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:templates="clr-namespace:com.company.todo.Templates;assembly=com.company.todo"
-             x:Class="com.company.todo.Views.UpdateLogPage">
+             xmlns:converters="clr-namespace:com.company.todo.Converters;assembly=com.company.todo"
+             x:Class="com.company.todo.Views.UpdateLogPage"
+             Title="Updates LOGS">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:BoolToStringConverter x:Key="BoolToStringConverter"/>
+            <converters:BoolToColorConverter x:Key="BoolToColorConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout Padding="20">
+            <Label Text="{Binding Count, StringFormat='Count: {0}'}"/>
             <ListView x:Name="ListViewUpdateLog" 
                       ItemsSource="{Binding UpdateLogs}" 
                       BackgroundColor="Transparent"
                       VerticalOptions="FillAndExpand">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell>
-                            <Label Text="{Binding UpdatedAt}"
-                                HorizontalOptions="Center"
-                                TextColor="Red"/>
-                        </ViewCell>
+                        <TextCell Text="{Binding Id, StringFormat='TODO Id: {0}'}"
+                                  Detail="{Binding UpdatedAt, StringFormat='Update At: {0:dd/MM/yyyy}'}"
+                                  DetailColor="Red">
+                        </TextCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

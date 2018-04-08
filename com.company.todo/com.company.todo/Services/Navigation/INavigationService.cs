@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace com.company.todo.Services.Navigation
 {
+    /// <summary>
+    /// Navigation Service Interfaces
+    /// </summary>
     public interface INavigationService
     {
         Task InitializeAsync();

@@ -10,6 +10,9 @@ using Xamarin.Forms.Xaml;
 
 namespace com.company.todo.Views
 {
+    /// <summary>
+    /// Render todoItem Updates Log
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class UpdateLogPage : ContentPage
     {

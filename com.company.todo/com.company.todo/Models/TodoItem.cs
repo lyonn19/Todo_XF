@@ -10,6 +10,9 @@ using Xamarin.Forms;
 
 namespace com.company.todo.Models
 {
+    /// <summary>
+    /// TodoItem Model 
+    /// </summary>
     public class TodoItem
     {
         [PrimaryKey, AutoIncrement]
@@ -20,7 +23,7 @@ namespace com.company.todo.Models
         public DateTime CreatedAt { get; set; }
 
         public DateTime UpdatedAt { get; set; }
-
+        
         public bool Status { get; set; }
         
         public byte[] Imagen { get; set; }
@@ -29,6 +32,9 @@ namespace com.company.todo.Models
         public ImageSource ImagenSource { get; set; }
     }
 
+    /// <summary>
+    /// ItemUpdate Model
+    /// </summary>
     public class ItemUpdate
     {
         public int Id { get; set; }

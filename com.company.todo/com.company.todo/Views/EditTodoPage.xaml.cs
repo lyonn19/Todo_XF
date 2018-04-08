@@ -10,6 +10,9 @@ using Xamarin.Forms.Xaml;
 
 namespace com.company.todo.Views
 {
+    /// <summary>
+    /// Render edit itemTodo
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class EditTodoPage : ContentPage
     {
@@ -18,7 +21,11 @@ namespace com.company.todo.Views
             InitializeComponent();
             BindingContext = ViewModelLocator.Instance.Resolve<EditTodoViewModel>();
         }
-
+        /// <summary>
+        /// Event Btn Clicked NavigateBack
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_OnClicked(object sender, EventArgs e)
         {
             Navigation.PopAsync(false);

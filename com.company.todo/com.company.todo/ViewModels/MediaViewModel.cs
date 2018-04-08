@@ -15,18 +15,17 @@ using Xamarin.Forms;
 
 namespace com.company.todo.ViewModels
 {
-
+    /// <summary>
+    /// Media Manager use MediaPlugin for camera and gallery access
+    /// </summary>
     internal class MediaViewModel : ViewModelBase
     {
+        #region Fields
         private ICommand _cameraCommand, _galleryCommand = null;
+        #endregion
 
-        public MediaViewModel()
-        {
-
-        }
-
+        #region Properties
         private ImageSource _previewImage;
-
         public ImageSource PreviewImage
         {
             get { return _previewImage; }
@@ -50,45 +49,51 @@ namespace com.company.todo.ViewModels
             }
         }
 
-        public ICommand CameraCommand
-        {
-            get
-            {
-                return _cameraCommand ??
-                       new Command(async () => await ExecuteCameraCommand(), () => CanExecuteCameraCommand());
-            }
-        }
+        #endregion
 
-        public ICommand GalleryCommand
+        #region Methods
+        /// <summary>
+        /// Execute camera picture
+        /// </summary>
+        /// <returns></returns>
+        public async Task ExecuteCameraCommand()
         {
-            get
+            if (IsBusy)
+                return;
+            try
             {
-                return _galleryCommand ??
-                       new Command(async () => await ExecuteGalleryCommand(), () => CanExecuteGalleryCommand());
-            }
-        }
+                IsBusy = true;
 
-        public bool CanExecuteCameraCommand()
-        {
-            if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
+                var file =
+                    await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions { PhotoSize = PhotoSize.Small });
+
+                if (file == null)
+                    return;
+
+                using (var memoryStream = new MemoryStream())
+                {
+                    file.GetStream().CopyTo(memoryStream);
+                    file.Dispose();
+                    PImage = memoryStream.ToArray();
+                }
+
+                var resizer = Xamarin.Forms.DependencyService.Get<IImageResize>();
+
+                PImage = resizer.ResizeImage(PImage, 1080, 1080);
+
+                PreviewImage = ImageSource.FromStream(() => new MemoryStream(PImage));
+
+            }
+            finally
             {
-                Application.Current.MainPage.DisplayAlert("No Camera", ":( No camera avaialble.", "OK");
-                return false;
+                IsBusy = false;
             }
-            return true;
-        }
 
-        public bool CanExecuteGalleryCommand()
-        {
-            if (!CrossMedia.Current.IsPickPhotoSupported)
-            {
-                Application.Current.MainPage.DisplayAlert("Photos Not Supported", ":( Permission not granted to photos.",
-                    "OK");
-                return false;
-            }
-            return true;
         }
-
+        /// <summary>
+        /// Execute pick from gallery
+        /// </summary>
+        /// <returns></returns>
         public async Task ExecuteGalleryCommand()
         {
             var file =
@@ -115,44 +120,46 @@ namespace com.company.todo.ViewModels
             PreviewImage = ImageSource.FromStream(() => new MemoryStream(PImage));
 
         }
+        #endregion
 
-        public async Task ExecuteCameraCommand()
+        #region Commands
+        public ICommand CameraCommand
         {
-            if (IsBusy)
-                return;
-            try
+            get
             {
-                IsBusy = true;
-
-                var file =
-                    await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions {PhotoSize = PhotoSize.Small});
-
-                if (file == null)
-                    return;
-
-                //byte[] imageAsBytes = null;
-                using (var memoryStream = new MemoryStream())
-                {
-                    file.GetStream().CopyTo(memoryStream);
-                    file.Dispose();
-                    PImage = memoryStream.ToArray();
-                }
-
-                var resizer = Xamarin.Forms.DependencyService.Get<IImageResize>();
-
-                PImage = resizer.ResizeImage(PImage, 1080, 1080);
-
-                //var imageSource = ImageSource.FromStream(() => new MemoryStream(imageAsBytes));
-
-                PreviewImage = ImageSource.FromStream(() => new MemoryStream(PImage));
-
+                return _cameraCommand ??
+                       new Command(async () => await ExecuteCameraCommand(), () => CanExecuteCameraCommand());
             }
-            finally
-            {
-                IsBusy = false;
-            }
-
         }
+        public bool CanExecuteCameraCommand()
+        {
+            if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
+            {
+                Application.Current.MainPage.DisplayAlert("No Camera", ":( No camera avaialble.", "OK");
+                return false;
+            }
+            return true;
+        }
+        
+        public ICommand GalleryCommand
+        {
+            get
+            {
+                return _galleryCommand ??
+                       new Command(async () => await ExecuteGalleryCommand(), () => CanExecuteGalleryCommand());
+            }
+        }
+        public bool CanExecuteGalleryCommand()
+        {
+            if (!CrossMedia.Current.IsPickPhotoSupported)
+            {
+                Application.Current.MainPage.DisplayAlert("Photos Not Supported", ":( Permission not granted to photos.",
+                    "OK");
+                return false;
+            }
+            return true;
+        }
+        #endregion
     }
 }
 

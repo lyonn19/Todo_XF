@@ -12,6 +12,9 @@ using Xamarin.Forms.Xaml;
 
 namespace com.company.todo.Views
 {
+    /// <summary>
+    /// Render doneItems List
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class DoneTodoPage : ContentPage
     {
@@ -69,6 +72,11 @@ namespace com.company.todo.Views
             }
         }
 
+        /// <summary>
+        /// Event Handle_ItemTapped in ListView
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             var task = ((ListView)sender).SelectedItem as TodoItem;
@@ -78,6 +86,11 @@ namespace com.company.todo.Views
             ViewModelLocator.Instance.Resolve<DoneViewModel>().NavigateToDetail.Execute(null);
         }
 
+        /// <summary>
+        /// Event Menu ContextAction OnDone : update itemTodo status (true) 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void OnDone(object sender, EventArgs e)
         {
             var todo = ((MenuItem)sender).CommandParameter as TodoItem;
@@ -88,7 +101,12 @@ namespace com.company.todo.Views
             ViewModelLocator.Instance.Resolve<EditTodoViewModel>().EditTodoCommand.Execute(null);
             ViewModelLocator.Instance.Resolve<DoneViewModel>().DoneCommand.Execute(null);
         }
-        
+
+        /// <summary>
+        /// Event Menu ContextAction OnEdit : NavigateToEditPage
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void OnEdit(object sender, EventArgs e)
         {
             var todo = ((MenuItem)sender).CommandParameter as TodoItem;
@@ -97,6 +115,11 @@ namespace com.company.todo.Views
             ViewModelLocator.Instance.Resolve<DoneViewModel>().NavigateToEdit.Execute(null);
         }
 
+        /// <summary>
+        /// Event Menu ContextAction OnDelete : delete itemTodo
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public async void OnDelete(object sender, EventArgs e)
         {
             var todo = ((MenuItem)sender).CommandParameter as TodoItem;

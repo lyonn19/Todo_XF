@@ -10,12 +10,18 @@ using Xamarin.Forms;
 
 namespace com.company.todo.ViewModels
 {
+
+    /// <summary>
+    /// ViewModel for DetailTodoPage show todoItem detail
+    /// </summary>
     public class DetailTodoViewModel : ViewModelBase
     {
+        #region Builder
         public DetailTodoViewModel()
         {
             SelectedTodoItem = new TodoItem();
         }
+        #endregion
 
         #region Properties
         private TodoItem _selectedTodoItem;
@@ -31,7 +37,12 @@ namespace com.company.todo.ViewModels
 
         #endregion
 
-        #region Funtions
+        #region Methods
+        /// <summary>
+        /// Init ViewModel
+        /// </summary>
+        /// <param name="navigationData"></param>
+        /// <returns></returns>
         public override Task InitializeAsync(object navigationData)
         {
             if (navigationData != null)
@@ -40,10 +51,13 @@ namespace com.company.todo.ViewModels
         }
         #endregion
 
-
+        #region Commands
+        /// <summary>
+        /// NavigateTo UpdateLogs
+        /// </summary>
         public ICommand NavigateToUpdateLog
         {
-            get
+            get 
             {
                 return new Command(async () =>
                 {
@@ -51,5 +65,6 @@ namespace com.company.todo.ViewModels
                 });
             }
         }
+        #endregion
     }
 }

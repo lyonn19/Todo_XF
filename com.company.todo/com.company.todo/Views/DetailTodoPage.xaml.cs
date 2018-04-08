@@ -12,6 +12,9 @@ using Xamarin.Forms.Xaml;
 
 namespace com.company.todo.Views
 {
+    /// <summary>
+    /// Render todoItem Details
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class DetailTodoPage : ContentPage
     {
@@ -21,6 +24,11 @@ namespace com.company.todo.Views
             BindingContext = ViewModelLocator.Instance.Resolve<DetailTodoViewModel>();
         }
 
+        /// <summary>
+        /// Event for share todoItem contents
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Share(object sender, EventArgs e)
         {
             var share = ViewModelLocator.Instance.Resolve<DetailTodoViewModel>().SelectedTodoItem;

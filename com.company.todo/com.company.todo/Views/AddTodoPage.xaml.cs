@@ -10,6 +10,9 @@ using Xamarin.Forms.Xaml;
 
 namespace com.company.todo.Views
 {
+    /// <summary>
+    /// Add New todoItem
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AddTodoPage : ContentPage
     {
@@ -18,7 +21,11 @@ namespace com.company.todo.Views
             InitializeComponent();
             BindingContext = ViewModelLocator.Instance.Resolve<AddTodoViewModel>();
         }
-
+        /// <summary>
+        /// Event BtnClicked display options for camera or gallery imagen
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void Button_OnClicked(object sender, EventArgs e)
         {
             var response = await DisplayActionSheet("Image From", "Cancel", "Delete", "Camera", "Gallery");

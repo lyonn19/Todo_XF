@@ -8,12 +8,13 @@ using SQLite;
 
 namespace com.company.todo.Data.Base
 {
+    /// <summary>
+    /// DataBaseAsync get database conection on each platform through DependencyService
+    /// </summary>
     public class BaseDatabase
     {
         protected SQLiteAsyncConnection _dbConn;
-        /// <summary>
-        /// Dependency Service, obtiene la conexión a la base de datos en las disferentes platatormas, cada platafoma implementa
-        /// </summary>
+        
         public BaseDatabase()
         {
             _dbConn = Xamarin.Forms.DependencyService.Get<ISqLite>().GetConnection();

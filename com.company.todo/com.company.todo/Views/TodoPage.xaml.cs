@@ -5,7 +5,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using com.company.todo.Control;
 using com.company.todo.Models;
 using com.company.todo.ViewModels;
 using com.company.todo.ViewModels.Base;
@@ -14,10 +13,13 @@ using Xamarin.Forms.Xaml;
 
 namespace com.company.todo.Views
 {
+    /// <summary>
+    /// Render todoItems List
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class TodoTasksPage : ContentPage
+    public partial class TodoPage : ContentPage
     {
-        public TodoTasksPage()
+        public TodoPage()
         {
             InitializeComponent();
             BindingContext = ViewModelLocator.Instance.Resolve<TodoViewModel>();
@@ -32,24 +34,6 @@ namespace com.company.todo.Views
         {
             base.OnAppearing();
             ViewModelLocator.Instance.Resolve<TodoViewModel>().TodoCommand.Execute(null);
-            //MessagingCenter.Subscribe<TodoViewModel, TransitionType>(this, AppSettings.TransitionMessage, (sender, arg) =>
-            //{
-            //    var transitionType = (TransitionType)arg;
-            //    var transitionNavigationPage = Parent as Control.TransitionNavigationPage;
-
-            //    if (transitionNavigationPage != null)
-            //    {
-            //        transitionNavigationPage.TransitionType = transitionType;
-            //        Navigation.PushAsync(new DoneTodoPage());
-            //        // todo navigate throught command
-            //    }
-            //});
-        }
-
-        protected override void OnDisappearing()
-        {
-            base.OnDisappearing();
-            //MessagingCenter.Unsubscribe<TodoViewModel, TransitionType>(this, AppSettings.TransitionMessage);
         }
 
         private void MenuItem_OnClicked(object sender, EventArgs e)
@@ -70,7 +54,6 @@ namespace com.company.todo.Views
             var any = enumerable.Any();
             ListViewTodo.ItemsSource = any ? (IEnumerable)enumerable : new List<string>() { "Tasks Not Found" };
         }
-
         
         /// <summary>
         /// Event OnTextChanged search task on text change
@@ -108,6 +91,11 @@ namespace com.company.todo.Views
             ViewModelLocator.Instance.Resolve<TodoViewModel>().NavigateToDetail.Execute(null);
         }
 
+        /// <summary>
+        /// Event Menu ContextAction OnDone : update itemTodo status (true) 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void OnDone(object sender, EventArgs e)
         {
             var todo = ((MenuItem)sender).CommandParameter as TodoItem;
@@ -119,6 +107,11 @@ namespace com.company.todo.Views
             ViewModelLocator.Instance.Resolve<TodoViewModel>().TodoCommand.Execute(null);
         }
 
+        /// <summary>
+        /// Event Menu ContextAction OnEdit : NavigateToEditPage
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void OnEdit(object sender, EventArgs e)
         {
             var todo = ((MenuItem)sender).CommandParameter as TodoItem;
@@ -127,6 +120,11 @@ namespace com.company.todo.Views
             ViewModelLocator.Instance.Resolve<TodoViewModel>().NavigateToEdit.Execute(null);
         }
 
+        /// <summary>
+        /// Event Menu ContextAction OnDelete : delete itemTodo
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public async void OnDelete(object sender, EventArgs e)
         {
             var todo = ((MenuItem) sender).CommandParameter as TodoItem;

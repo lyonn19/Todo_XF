@@ -10,21 +10,15 @@ using Xamarin.Forms;
 
 namespace com.company.todo
 {
+    /// <summary>
+    /// Main App
+    /// </summary>
     public partial class App : Application
     {
         public App()
         {
             InitializeComponent();
-
-            MainPage = new NavigationPage(new TodoTasksPage());
-            //NavigationInit();
-            //MainPage = new MainPage();
-        }
-
-        private Task NavigationInit()
-        {
-            var navigationService = ViewModelLocator.Instance.Resolve<INavigationService>();
-            return navigationService.InitializeAsync();
+            MainPage = new NavigationPage(new TodoPage());
         }
 
         protected override void OnStart()

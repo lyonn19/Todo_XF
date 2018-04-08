@@ -8,7 +8,6 @@ using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows.Input;
-using com.company.todo.Control;
 using com.company.todo.Data.Local;
 using com.company.todo.Models;
 using com.company.todo.ViewModels.Base;
@@ -17,17 +16,22 @@ using Task = System.Threading.Tasks.Task;
 
 namespace com.company.todo.ViewModels
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class TodoViewModel : ViewModelBase
     {
-
+        #region Fields
         public ObservableCollection<TodoItem> TodoItems { get; set; }
+        #endregion
 
-
+        #region Builder
         public TodoViewModel()
         {
             TodoItems = new ObservableCollection<TodoItem>();
             SelectedTodoItem = new TodoItem();
         }
+        #endregion
 
         #region Properties
         private TodoItem _selectedTask;
@@ -42,7 +46,7 @@ namespace com.company.todo.ViewModels
         }
         #endregion
 
-        #region Funtions
+        #region Methods
         /// <summary>
         /// Init ViewModel
         /// </summary>
@@ -50,11 +54,14 @@ namespace com.company.todo.ViewModels
         /// <returns></returns>
         public override Task InitializeAsync(object navigationData)
         {
-            //TodoTaskCommand.Execute(null);
             return Task.FromResult(false);
             //return base.InitializeAsync(navigationData);
         }
 
+        /// <summary>
+        /// Get todos todoItems from local database
+        /// </summary>
+        /// <returns></returns>
         private async Task GetTodo()
         {
             try
@@ -66,6 +73,7 @@ namespace com.company.todo.ViewModels
                     {
                         Id = item.Id,
                         ImagenSource = ImageSource.FromStream(() => new MemoryStream(item.Imagen)),
+                        Imagen = item.Imagen,
                         Content = item.Content,
                         CreatedAt = item.CreatedAt,
                         Status = item.Status,
@@ -74,12 +82,16 @@ namespace com.company.todo.ViewModels
                 }
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayAlert("Error", "Error getting TODO, try again", "OK");
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message+ "Error getting TODO, try again", "OK");
             }
         }
 
+        /// <summary>
+        /// Delete todoItem from local database
+        /// </summary>
+        /// <returns></returns>
         private async Task DeleteTodo()
         {
             try
@@ -92,17 +104,9 @@ namespace com.company.todo.ViewModels
                 throw;
             }
         }
-
-
         #endregion
 
         #region Command
-        //public ICommand FlipCommand => new Command(Flip);
-        //private void Flip()
-        //{
-        //    MessagingCenter.Send(this, AppSettings.TransitionMessage, TransitionType.Flip);
-        //}
-
         public ICommand NavigateToNewTodo
         {
             get
@@ -181,8 +185,6 @@ namespace com.company.todo.ViewModels
                 TodoCommand.Execute(null);
             }
         }
-        
-
         #endregion
 
     }

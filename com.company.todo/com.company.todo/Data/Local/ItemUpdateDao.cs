@@ -8,6 +8,10 @@ using com.company.todo.Models;
 
 namespace com.company.todo.Data.Local
 {
+
+    /// <summary>
+    /// DAO for register ItemUpdates records (Master/Detail*) crud implemented
+    /// </summary>
     public class ItemUpdateDao : BaseDatabase 
     {
         private static ItemUpdateDao _instance;

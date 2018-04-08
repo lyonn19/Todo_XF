@@ -3,10 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:converters="clr-namespace:com.company.todo.Converters;assembly=com.company.todo"
              x:Class="com.company.todo.Templates.TasksTemplate">
-    
     <ContentView.Resources>
         <ResourceDictionary>
             <converters:BoolToStringConverter x:Key="BoolToStringConverter"/>
+            <converters:BoolToColorConverter x:Key="BoolToColorConverter"/>
         </ResourceDictionary>
     </ContentView.Resources>
     <ContentView.Content>
@@ -25,20 +25,22 @@
                 Grid.Column="0" 
                 Grid.RowSpan="2"
                 Source="{Binding ImagenSource}"/>
-
+            
             <Label Grid.Row="0" 
                 Grid.Column="1"
                 Text="{Binding Content}"/>
-
+            
             <Label Grid.Row="1" 
                 Grid.Column="1"
-                Text="{Binding UpdatedAt}" TextColor="Red"/>
+                Text="{Binding UpdatedAt}"/>
 
             <Label 
                 Grid.Row="0" 
                 Grid.Column="2"
                 Grid.RowSpan="2"
-                Text="{Binding Status, Converter={StaticResource BoolToStringConverter}}"/>
+                VerticalTextAlignment="Center"
+                Text="{Binding Status, Converter={StaticResource BoolToStringConverter}}"
+                TextColor="{Binding Status, Converter={StaticResource BoolToColorConverter}}"/>
 
         </Grid>
 

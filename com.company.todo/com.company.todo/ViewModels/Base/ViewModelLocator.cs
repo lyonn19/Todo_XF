@@ -9,12 +9,11 @@ using Microsoft.Practices.Unity;
 
 namespace com.company.todo.ViewModels.Base
 {
+    /// <summary>
+    /// ViewModel Locator Pattern for Register and Resolve objects dependency
+    /// </summary>
     public class ViewModelLocator
     {
-        private static AddTodoViewModel _tasksViewModel;
-        public static AddTodoViewModel TasksViewModel
-            => _tasksViewModel ?? (_tasksViewModel = new AddTodoViewModel());
-
         private readonly IUnityContainer _container;
 
         public static ViewModelLocator Instance { get; } = new ViewModelLocator();
@@ -25,9 +24,6 @@ namespace com.company.todo.ViewModels.Base
 
             // services
             _container.RegisterType<INavigationService, NavigationService>();
-            // remote services
-
-            // repository
 
             // viewmodels
             _container.RegisterType<TodoViewModel>(new ContainerControlledLifetimeManager());

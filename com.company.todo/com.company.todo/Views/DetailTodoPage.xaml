@@ -1,20 +1,54 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:com.company.todo.Converters;assembly=com.company.todo"
              x:Class="com.company.todo.Views.DetailTodoPage"
              Title="TODO Details">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:BoolToStringConverter x:Key="BoolToStringConverter"/>
+            <converters:BoolToColorConverter x:Key="BoolToColorConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.ToolbarItems>
         <ToolbarItem x:Name="Log" Text="Logs" Command="{Binding NavigateToUpdateLog}"/>
         <ToolbarItem x:Name="s" Icon="ic_stat_share.png" Clicked="Share"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout Padding="20">
-            <Image Source="{Binding SelectedTodoItem.ImagenSource}"/>
-            <Label Text="{Binding SelectedTodoItem.Content}"/>
-            <Label Text="{Binding SelectedTodoItem.CreatedAt}"/>
-            <Label Text="{Binding SelectedTodoItem.Status}"/>
-            <Label Text="{Binding SelectedTodoItem.UpdatedAt}"/>
-            <ListView></ListView>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0"
+                    Text="Attachment"/>
+                <Image Grid.Row="1" Grid.Column="0"
+                    Source="{Binding SelectedTodoItem.ImagenSource}"/>
+                <Label Grid.Row="2" Grid.Column="0"
+                    Text="Content"/>       
+                <Label Grid.Row="3" Grid.Column="0"
+                    Text="{Binding SelectedTodoItem.Content}"/>
+                <Label Grid.Row="4" Grid.Column="0"
+                    Text="Created"/>
+                <Label Grid.Row="5" Grid.Column="0"
+                    Text="{Binding SelectedTodoItem.CreatedAt}"/>
+                <Label Grid.Row="6" Grid.Column="0"
+                    Text="{Binding SelectedTodoItem.Status, Converter={StaticResource BoolToStringConverter},StringFormat='Status {0}'}"
+                    TextColor="{Binding SelectedTodoItem.Status, Converter={StaticResource BoolToColorConverter}}"/>
+                <Label Grid.Row="7" Grid.Column="0"
+                    Text="Updated"/>
+                <Label Grid.Row="8" Grid.Column="0"
+                    Text="{Binding SelectedTodoItem.UpdatedAt}"/>
+            </Grid>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

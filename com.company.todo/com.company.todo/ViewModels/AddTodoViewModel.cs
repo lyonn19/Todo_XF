@@ -15,9 +15,11 @@ using Xamarin.Forms;
 
 namespace com.company.todo.ViewModels
 {
+    /// <summary>
+    /// ViewModel for AddTodoPage AddNew todoItem
+    /// </summary>
     public class AddTodoViewModel : ViewModelBase
     {
-        
         #region Properties
         private string _content;
         public string Content
@@ -43,20 +45,9 @@ namespace com.company.todo.ViewModels
         }
         #endregion
 
-        #region Funtions
-
+        #region Methods
         /// <summary>
-        /// Init ViewModel
-        /// </summary>
-        /// <param name="navigationData"></param>
-        /// <returns></returns>
-        public override Task InitializeAsync(object navigationData)
-        {
-            return base.InitializeAsync(navigationData);
-        }
-
-        /// <summary>
-        /// Add new Task persist local
+        /// Add new todoItem in local database
         /// </summary>
         /// <returns></returns>
         private async Task AddTodo()
@@ -71,6 +62,8 @@ namespace com.company.todo.ViewModels
                     Status = false,
                     UpdatedAt = DateTime.Now,
                 });
+
+                await Application.Current.MainPage.DisplayAlert("Info", "Item added successfully", "OK");
             }
             catch (Exception)
             {
@@ -82,7 +75,6 @@ namespace com.company.todo.ViewModels
         #endregion
 
         #region Commands
-
         Command _addTodoCommand;
         public Command AddTodoCommand
         {
@@ -105,8 +97,6 @@ namespace com.company.todo.ViewModels
                 IsBusy = false;
             }
         }
-
-        
         #endregion
     }
 }

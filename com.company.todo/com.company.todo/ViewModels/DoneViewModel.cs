@@ -13,16 +13,24 @@ using Xamarin.Forms;
 
 namespace com.company.todo.ViewModels
 {
+    /// <summary>
+    /// ViewModel for DoneTodoPage shows all done todoItem
+    /// </summary>
     class DoneViewModel : ViewModelBase
     {
+        #region Fields
         public ObservableCollection<TodoItem> DoneItems { get; set; }
+        #endregion
 
+        #region Builder
         public DoneViewModel()
         {
             DoneItems = new ObservableCollection<TodoItem>();
             SelectedTodoItem = new TodoItem();
         }
+        #endregion
 
+        #region Properties
         private TodoItem _selectedTodoItem;
         public TodoItem SelectedTodoItem
         {
@@ -33,14 +41,24 @@ namespace com.company.todo.ViewModels
                 OnPropertyChanged();
             }
         }
+        #endregion
 
-        #region Funtions
+        #region Methods
+        /// <summary>
+        /// Init ViewModel
+        /// </summary>
+        /// <param name="navigationData"></param>
+        /// <returns></returns>
         public override Task InitializeAsync(object navigationData)
         {
             DoneCommand.Execute(null);
             return base.InitializeAsync(navigationData);
         }
 
+        /// <summary>
+        /// Get done todoItems from local database
+        /// </summary>
+        /// <returns></returns>
         private async Task GetDone()
         {
             try
@@ -65,6 +83,10 @@ namespace com.company.todo.ViewModels
             }
         }
 
+        /// <summary>
+        /// Delete todoItem from local database
+        /// </summary>
+        /// <returns></returns>
         private async Task DeleteTodo()
         {
             try
@@ -74,12 +96,10 @@ namespace com.company.todo.ViewModels
             catch (Exception)
             {
                 await Application.Current.MainPage.DisplayAlert("Error", "Error occured", "OK");
-                throw;
             }
         }
         #endregion
-
-
+        
         #region Commands
         public ICommand NavigateToDetail
         {

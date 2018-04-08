@@ -8,6 +8,9 @@ using Xamarin.Forms;
 
 namespace com.company.todo.Services.Navigation
 {
+    /// <summary>
+    /// Navigation Services implementation (NavigateTo, NavigateBack,...)
+    /// </summary>
     public class NavigationService : INavigationService
     {
         protected readonly Dictionary<Type, Type> Mappings;
@@ -94,7 +97,7 @@ namespace com.company.todo.Services.Navigation
 
         private void CreatePageViewModelMappings()
         {
-            Mappings.Add(typeof(TodoViewModel), typeof(TodoTasksPage));
+            Mappings.Add(typeof(TodoViewModel), typeof(TodoPage));
             Mappings.Add(typeof(DoneViewModel), typeof(DoneTodoPage));
             Mappings.Add(typeof(AddTodoViewModel), typeof(AddTodoPage));
             Mappings.Add(typeof(DetailTodoViewModel), typeof(DetailTodoPage));

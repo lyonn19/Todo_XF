@@ -7,6 +7,9 @@ using SQLite;
 
 namespace com.company.todo.DependencyService
 {
+    /// <summary>
+    /// Interface for SqliteConection using in DependencyService
+    /// </summary>
     public interface ISqLite
     {
         SQLiteAsyncConnection GetConnection();
