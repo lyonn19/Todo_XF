@@ -40,7 +40,7 @@ namespace com.company.todo.ViewModels
         }
         #endregion
 
-        #region Funcions
+        #region Funtions
         /// <summary>
         /// Init ViewModel
         /// </summary>

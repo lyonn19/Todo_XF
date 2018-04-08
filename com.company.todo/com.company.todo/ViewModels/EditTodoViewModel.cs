@@ -28,7 +28,7 @@ namespace com.company.todo.ViewModels
             }
         }
 
-        #region Funcions
+        #region Funtions
         public override Task InitializeAsync(object navigationData)
         {
             if (navigationData != null)

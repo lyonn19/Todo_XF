@@ -85,7 +85,7 @@ namespace com.company.todo.ViewModels
         }
         #endregion
 
-        #region Use cases
+        #region Funtions
 
         /// <summary>
         /// Init ViewModel

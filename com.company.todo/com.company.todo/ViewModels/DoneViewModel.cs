@@ -34,7 +34,7 @@ namespace com.company.todo.ViewModels
             }
         }
 
-        #region Funcions
+        #region Funtions
         public override Task InitializeAsync(object navigationData)
         {
             DoneCommand.Execute(null);
@@ -68,11 +68,7 @@ namespace com.company.todo.ViewModels
         {
             try
             {
-                var result = await TodoDao.Instance.DeleteTodoAsync(SelectedTodoItem);
-                if (result >= 0)
-                {
-                    await Application.Current.MainPage.DisplayAlert("Info", "TODO deleted sucessfully", "OK");
-                }
+                await TodoDao.Instance.DeleteTodoAsync(SelectedTodoItem);
             }
             catch (Exception)
             {

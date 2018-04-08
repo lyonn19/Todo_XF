@@ -26,5 +26,12 @@ namespace com.company.todo.Models
         [Ignore]
         public ImageSource ImagenSource { get; set; }
     }
+
+    public class ItemUpdate
+    {
+        public int Id { get; set; }
+        public DateTime UpdateAt { get; set; }
+    }
+
 }
     

@@ -32,7 +32,7 @@ namespace com.company.todo.ViewModels
         public override Task InitializeAsync(object navigationData)
         {
             if (navigationData != null)
-                _selectedTodoItem = (TodoItem)navigationData;
+                SelectedTodoItem = (TodoItem)navigationData;
             return base.InitializeAsync(navigationData);
         }
     }

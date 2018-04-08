@@ -41,8 +41,10 @@
     <Compile Include="AppSettings.cs" />
     <Compile Include="Control\TransitionNavigationPage.cs" />
     <Compile Include="Data\Base\BaseDatabase.cs" />
-    <Compile Include="Data\Local\TaskDAO.cs" />
+    <Compile Include="Data\Local\ItemUpdateDao.cs" />
+    <Compile Include="Data\Local\TodoDAO.cs" />
     <Compile Include="DependencyService\IImageResize.cs" />
+    <Compile Include="DependencyService\IShareServices.cs" />
     <Compile Include="DependencyService\ISqlite.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -125,6 +127,10 @@
       <HintPath>..\..\packages\SQLitePCLRaw.core.1.1.5\lib\portable-net45+netcore45+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\SQLitePCLRaw.core.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\netstandard1.1\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Xamarin.Forms.2.4.0.282\lib\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.Core.dll</HintPath>
       <Private>True</Private>
@@ -141,9 +147,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Data\Remote\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="Views\TodoTasksPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>

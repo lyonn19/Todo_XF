@@ -3,6 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="com.company.todo.Views.DetailTodoPage"
              Title="Task Details">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="Save" Icon="ic_stat_share.png" Clicked="Share"/>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
             <Image Source="{Binding SelectedTodoItem.ImagenSource}"/>
