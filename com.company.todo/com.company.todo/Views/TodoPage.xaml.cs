@@ -34,6 +34,8 @@ namespace com.company.todo.Views
         {
             base.OnAppearing();
             ViewModelLocator.Instance.Resolve<TodoViewModel>().TodoCommand.Execute(null);
+            ViewModelLocator.Instance.Resolve<AddTodoViewModel>().Content = null;
+            ViewModelLocator.Instance.Resolve<AddTodoViewModel>().ImagenSource = null;
         }
 
         private void MenuItem_OnClicked(object sender, EventArgs e)
