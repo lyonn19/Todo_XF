@@ -55,6 +55,7 @@ namespace com.company.todo.ViewModels
         {
             try
             {
+                SelectedTodoItem.UpdatedAt = DateTime.Now;
                 await TodoDao.Instance.EditTodoAsync(SelectedTodoItem);
             }
             catch (Exception)
