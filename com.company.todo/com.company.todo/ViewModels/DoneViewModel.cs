@@ -71,6 +71,7 @@ namespace com.company.todo.ViewModels
                     {
                         Id = item.Id,
                         ImagenSource = ImageSource.FromStream(() => new MemoryStream(item.Imagen)),
+                        Imagen = item.Imagen,
                         Content = item.Content,
                         CreatedAt = item.CreatedAt,
                         Status = item.Status,
