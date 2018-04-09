@@ -30,6 +30,7 @@ namespace com.company.todo.ViewModels
             get { return _selectedTodoItem; }
             set
             {
+                if(value == null)return;
                 _selectedTodoItem = value;
                 OnPropertyChanged();
             }
